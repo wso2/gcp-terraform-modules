@@ -10,8 +10,8 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_project_service" "project_service" {
-  project = var.project_id
-  for_each = toset(var.project_services)
-  service = each.value
+  project                    = var.project_id
+  for_each                   = toset(var.project_services)
+  service                    = each.value
   disable_dependent_services = true
 }

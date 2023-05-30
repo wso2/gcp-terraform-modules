@@ -14,5 +14,5 @@ resource "google_dns_managed_zone" "dns_managed_zone" {
   dns_name    = var.dns_name
   description = join(" ", ["The DNS zone for", var.dns_name])
   project     = var.project_name
-  labels      = var.labels   
+  labels      = var.labels
 }

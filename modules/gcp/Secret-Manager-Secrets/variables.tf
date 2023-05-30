@@ -18,7 +18,7 @@ variable "secrets" {
   description = "The list of the secrets"
   default     = []
 }
-variable labels {
+variable "labels" {
   description = "The labels"
   type        = map(string)
 }
