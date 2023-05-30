@@ -9,11 +9,23 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_project" "project" {
-  name                 = join("-", [var.project_name, var.environment])
-  project_id           = join("-", [var.project_name, var.environment])
-  billing_account      = var.billing_account_id
-  folder_id            = var.folder_id
-  labels               = var.labels
-  auto_create_network  = "false"
+variable "project_name" {
+  description = "The Project name to add the DNS A Record"
+  type        = string
+}
+variable "a_record_name" {
+  description = "The A Record name"
+  type        = string
+}
+variable "managed_zone_name" {
+  description = "The managed zone name"
+  type        = string
+}
+variable "ttl" {
+  description = "The time to live value of the a record"
+  type        = string
+}
+variable "rrdatas" {
+  type        = list(string)
+  description = "List of IPv4 Addresses."
 }

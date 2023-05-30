@@ -9,11 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_project" "project" {
-  name                 = join("-", [var.project_name, var.environment])
-  project_id           = join("-", [var.project_name, var.environment])
-  billing_account      = var.billing_account_id
-  folder_id            = var.folder_id
-  labels               = var.labels
-  auto_create_network  = "false"
+output "dns_record_set_id" {
+  value      = google_dns_record_set.a_record.id
+  depends_on = [google_dns_record_set.a_record]
 }

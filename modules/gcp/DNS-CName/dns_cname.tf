@@ -9,11 +9,11 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_project" "project" {
-  name                 = join("-", [var.project_name, var.environment])
-  project_id           = join("-", [var.project_name, var.environment])
-  billing_account      = var.billing_account_id
-  folder_id            = var.folder_id
-  labels               = var.labels
-  auto_create_network  = "false"
+resource "google_dns_record_set" "cname" {
+  project      = var.project_name
+  name         = var.c_name_record_name
+  managed_zone = var.managed_zone_name
+  type         = "CNAME"
+  ttl          = var.ttl
+  rrdatas      = var.rrdatas
 }
