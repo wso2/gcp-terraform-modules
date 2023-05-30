@@ -15,5 +15,5 @@ variable "project_id" {
 }
 variable project_services {
   description = "The project API services"
-  type        = string
+  type        = list(string)
 }

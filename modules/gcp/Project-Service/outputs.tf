@@ -8,8 +8,3 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
-
-output "project_service_id" {
-  value      = google_project_service.project_service.id
-  depends_on = [google_project_service.project_service]
-}
