@@ -10,10 +10,10 @@
 # --------------------------------------------------------------------------------------
 
 output "artifact_registry_repository_id" {
-  value      = google_artifact_registry_repository.gar_repository.id
-  depends_on = [google_artifact_registry_repository.gar_repository]
+  value      = google_artifact_registry_repository.artifact_registry_repository.id
+  depends_on = [google_artifact_registry_repository.artifact_registry_repository]
 }
 output "artifact_registry_repository_name" {
-  value      = google_artifact_registry_repository.gar_repository.name
-  depends_on = [google_artifact_registry_repository.gar_repository]
+  value      = google_artifact_registry_repository.artifact_registry_repository.name
+  depends_on = [google_artifact_registry_repository.artifact_registry_repository]
 }

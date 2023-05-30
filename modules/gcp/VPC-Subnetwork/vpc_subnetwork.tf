@@ -15,4 +15,5 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   ip_cidr_range = var.ip_cidr_range
   region        = var.region
   network       = var.vpc_id
+  description   = join(" ", ["Subnetwork of", var.vpc_id, " in ", var.region,])
 }

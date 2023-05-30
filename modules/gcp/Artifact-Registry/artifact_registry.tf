@@ -9,7 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_artifact_registry_repository" "gar_repository" {
+resource "google_artifact_registry_repository" "artifact_registry_repository" {
   repository_id = join("-", ["gar", var.project_name, var.location])
   location      = var.location
   description   = join(" ", ["Artifact Registry of", var.project_name])
