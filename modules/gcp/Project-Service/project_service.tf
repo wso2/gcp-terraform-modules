@@ -9,11 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_project" "project" {
-  name                = join("-", [var.project_name, var.environment])
-  project_id          = join("-", [var.project_name, var.environment])
-  billing_account     = var.billing_account_id
-  folder_id           = var.folder_id
-  labels              = var.labels
-  auto_create_network = "false"
+resource "google_project_service" "project_service" {
+  project                    = var.project_id
+  for_each                   = toset(var.project_services)
+  service                    = each.value
+  disable_dependent_services = true
 }

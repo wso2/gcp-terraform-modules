@@ -13,7 +13,7 @@ variable "project_id" {
   description = "The ID of the project"
   type        = string
 }
-variable project_services {
+variable "project_services" {
   description = "The project API services"
   type        = list(string)
 }

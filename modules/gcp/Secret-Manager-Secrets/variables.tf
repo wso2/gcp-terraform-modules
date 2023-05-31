@@ -9,11 +9,16 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_project" "project" {
-  name                = join("-", [var.project_name, var.environment])
-  project_id          = join("-", [var.project_name, var.environment])
-  billing_account     = var.billing_account_id
-  folder_id           = var.folder_id
-  labels              = var.labels
-  auto_create_network = "false"
+variable "project_name" {
+  description = "The name of the project"
+  type        = string
+}
+variable "secrets" {
+  type        = list(map(string))
+  description = "The list of the secrets"
+  default     = []
+}
+variable "labels" {
+  description = "The labels"
+  type        = map(string)
 }
