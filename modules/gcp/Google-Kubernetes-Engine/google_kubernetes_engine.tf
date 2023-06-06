@@ -10,10 +10,9 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "cluster" {
-  name         = join("-", ["gke", var.project, var.cluster_location])
-  project      = var.project
-  description  = join("", ["GKE cluster for ", var.project, " located in ", var.cluster_location])
-  node_version = var.gke_cluster_version
+  name        = join("-", ["gke", var.project, var.cluster_location])
+  project     = var.project
+  description = join("", ["GKE cluster for ", var.project, " located in ", var.cluster_location])
 
   # Regional cluster
   location                  = var.cluster_location
@@ -65,6 +64,14 @@ resource "google_container_cluster" "cluster" {
   }
   vertical_pod_autoscaling {
     enabled = true
+  }
+  confidential_nodes {
+    enabled = true
+  }
+  node_config {
+    preemptible  = true
+    machine_type = "n2d-standard-2"
+    labels       = var.labels
   }
 
   depends_on = [

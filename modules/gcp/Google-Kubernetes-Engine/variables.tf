@@ -22,10 +22,6 @@ variable "cluster_location" {
   description = "The location name"
   type        = string
 }
-variable "gke_cluster_version" {
-  description = "The gke cluster version"
-  type        = string
-}
 variable "vpc_id" {
   description = "The vpc id"
   type        = string
