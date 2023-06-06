@@ -11,6 +11,13 @@ variable "machine_type" {
   default     = "n1-standard-1"
 }
 
+
+variable "region" {
+  description = "Zone where the bastion host will be created"
+  type        = string
+  default     = "us-central1"
+}
+
 variable "zone" {
   description = "Zone where the bastion host will be created"
   type        = string
@@ -44,4 +51,9 @@ variable "tags" {
 variable "project_id" {
   description = "ID of the GCP project"
   type        = string
+}
+
+variable "vpc_id" {
+  description = "ID of the GCP project"
+  # type        = string
 }
