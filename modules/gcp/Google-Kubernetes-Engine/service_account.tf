@@ -11,7 +11,7 @@
 
 resource "google_service_account" "cluster_service_account" {
   project      = var.project
-  account_id   = join("-", ["gke", "service-accoutn", var.environment])
-  display_name = join("-", ["gke", "service-accoutn", var.environment])
+  account_id   = join("-", ["gke", "service-account", var.environment])
+  display_name = join("-", ["gke", "service-account", var.environment])
   description  = join("", ["GKE service account for ", var.project, " in ", var.environment, " environment ", " located in ", var.cluster_location])
 }
