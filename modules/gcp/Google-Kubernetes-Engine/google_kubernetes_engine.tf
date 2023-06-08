@@ -10,9 +10,9 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "cluster" {
-  name         = join("-", ["gke", var.project, var.cluster_location])
-  project      = var.project
-  description  = join("", ["GKE cluster for ", var.project, " located in ", var.cluster_location])
+  name        = join("-", ["gke", var.project, var.cluster_location])
+  project     = var.project
+  description = join("", ["GKE cluster for ", var.project, " located in ", var.cluster_location])
 
   # Regional cluster
   location                  = var.cluster_location
@@ -67,9 +67,9 @@ resource "google_container_cluster" "cluster" {
       resource_type = "memory"
     }
     auto_provisioning_defaults {
-      disk_type         = "pd-balanced"
-      image_type        = "COS_CONTAINERD"
-      service_account   = google_service_account.cluster_service_account.email
+      disk_type       = "pd-balanced"
+      image_type      = "COS_CONTAINERD"
+      service_account = google_service_account.cluster_service_account.email
       management {
         auto_repair  = true
         auto_upgrade = false
@@ -132,13 +132,13 @@ resource "google_container_node_pool" "node_pool" {
   node_locations = var.node_pool_zone_locations
 
   node_config {
-    preemptible       = false
-    machine_type      = var.node_pool_machine_type
-    service_account   = google_service_account.cluster_service_account.email
-    image_type        = "COS_CONTAINERD"
-    local_ssd_count   = 0
-    disk_size_gb      = 100
-    disk_type         = "pd-balanced"
+    preemptible     = false
+    machine_type    = var.node_pool_machine_type
+    service_account = google_service_account.cluster_service_account.email
+    image_type      = "COS_CONTAINERD"
+    local_ssd_count = 0
+    disk_size_gb    = 100
+    disk_type       = "pd-balanced"
     metadata = {
       "disable-legacy-endpoints" = "true"
     }
@@ -156,9 +156,9 @@ resource "google_container_node_pool" "node_pool" {
     pod_range            = "cluster-pods"
   }
   autoscaling {
-    max_node_count       = var.node_pool_max_node_count
-    min_node_count       = var.node_pool_min_node_count
-    location_policy      = "BALANCED"
+    max_node_count  = var.node_pool_max_node_count
+    min_node_count  = var.node_pool_min_node_count
+    location_policy = "BALANCED"
   }
   upgrade_settings {
     max_surge       = 1
