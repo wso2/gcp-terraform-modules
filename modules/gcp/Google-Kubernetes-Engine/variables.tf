@@ -30,10 +30,6 @@ variable "cluster_ipv4_cidr" {
   description = "The cluster ipv4 cidr"
   type        = string
 }
-variable "node_pool_name" {
-  description = "The node pool name"
-  type        = string
-}
 variable "node_pool_location" {
   description = "The node pool location"
   type        = string
