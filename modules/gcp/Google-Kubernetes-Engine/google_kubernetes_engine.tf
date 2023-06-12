@@ -51,6 +51,9 @@ resource "google_container_cluster" "cluster" {
       issue_client_certificate = false
     }
   }
+  workload_identity_config {
+    workload_pool = join(".", [var.project, "svc.id.goog"])
+  }
   release_channel {
     channel = "UNSPECIFIED"
   }
