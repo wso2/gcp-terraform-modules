@@ -19,7 +19,7 @@ resource "google_compute_instance" "bastion_vm" {
     initialize_params {
       image = "ubuntu-os-cloud/ubuntu-2204-lts"
       labels = {
-        my_label = "value"
+        boot_disk = "ubuntu-2204-lts"
       }
     }
   }
