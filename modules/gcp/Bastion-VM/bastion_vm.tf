@@ -12,12 +12,12 @@ resource "google_compute_instance" "bastion_vm" {
   name         = join("-", ["vmbastion", var.project, var.location])
   project      = var.project
   description  = join(" ", ["Bastion VM for", var.project])
-  machine_type = "e2-medium"
+  machine_type = var.bastion_vm_machine_type
   zone         = var.zone
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2204-lts"
+      image = var.boot_disk_image
       labels = {
         boot_disk = "ubuntu-2204-lts"
       }
@@ -52,7 +52,7 @@ resource "google_compute_instance" "bastion_vm" {
     EOF
 
   service_account {
-    email  = var.service_account_email
+    email  = var.bastion_service_account_email
     scopes = ["cloud-platform"]
   }
 

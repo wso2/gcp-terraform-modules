@@ -21,8 +21,8 @@ variable "location" {
   description = "The location to host the GAR"
   type        = string
 }
-variable "service_account_email" {
-  description = "The service account email"
+variable "bastion_service_account_email" {
+  description = "The bastion service account email"
   type        = string
 }
 variable "vpc_name" {
@@ -36,4 +36,14 @@ variable "subnetwork_id" {
 variable  "ssh_public_key_path" {
   description = "The path to the ssh public key"
   type        = string
+}
+variable "bastion_vm_machine_type" {
+  description = "The bastion vm machine type"
+  type        = string
+  default     = "e2-medium"
+}
+variable "boot_disk_image" {
+  description = "The boot disk image"
+  type        = string
+  default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }
