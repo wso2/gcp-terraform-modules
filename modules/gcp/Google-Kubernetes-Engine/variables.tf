@@ -30,6 +30,21 @@ variable "cluster_ipv4_cidr" {
   description = "The cluster ipv4 cidr"
   type        = string
 }
+variable "cluster_primary_subnet_cidr_range" {
+  description = "The cluster primary subnet cidr range"
+  type        = string
+  default     = "192.30.0.0/15"
+}
+variable "cluster_secondry_pods_cidr_range" {
+  description = "The cluster secondry pods cidr range"
+  type        = string
+  default     = "10.40.0.0/15"
+}
+variable "cluster_secondry_services_cidr_range" {
+  description = "The cluster secondry services cidr range"
+  type        = string
+  default     = "10.43.0.0/20"
+}
 variable "node_pool_location" {
   description = "The node pool location"
   type        = string
