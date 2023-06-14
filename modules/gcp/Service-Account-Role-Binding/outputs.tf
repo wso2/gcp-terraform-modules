@@ -8,10 +8,3 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
-
-resource "google_service_account" "service_account" {
-  project      = var.project_name
-  account_id   = join("-", ["svcacc", var.service_account_name, var.environment])
-  display_name = join("-", ["svcacc", var.service_account_name, var.environment])
-  description  = join("", ["Service account :", var.service_account_name, " for ", var.project_name])
-}

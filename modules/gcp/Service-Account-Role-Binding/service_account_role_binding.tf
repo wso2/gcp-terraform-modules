@@ -9,9 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_service_account" "service_account" {
-  project      = var.project_name
-  account_id   = join("-", ["svcacc", var.service_account_name, var.environment])
-  display_name = join("-", ["svcacc", var.service_account_name, var.environment])
-  description  = join("", ["Service account :", var.service_account_name, " for ", var.project_name])
+resource "google_project_iam_member" "service_account_iam_member" {
+  for_each = { for idx, role in var.service_account_roles : idx => role }
+  project  = var.project_name
+  role     = each.value
+  member   = join(":", ["serviceAccount", var.service_account_email])
 }
