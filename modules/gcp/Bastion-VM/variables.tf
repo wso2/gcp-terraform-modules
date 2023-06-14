@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 variable "project" {
-  description = "The project name to host the GAR"
+  description = "The project of the bastion VM"
   type        = string
 }
 variable "zone" {
