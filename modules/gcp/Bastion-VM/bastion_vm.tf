@@ -24,15 +24,15 @@ resource "google_compute_instance" "bastion_vm" {
     }
   }
   network_interface {
-    network = var.vpc_name
+    network            = var.vpc_name
     subnetwork_project = var.project
-    subnetwork = var.subnetwork_id
+    subnetwork         = var.subnetwork_id
 
     access_config {
     }
   }
-  metadata  = {
-   ssh-keys = file(var.ssh_public_key_path)
+  metadata = {
+    ssh-keys = file(var.ssh_public_key_path)
   }
 
   metadata_startup_script = <<-EOF
@@ -49,6 +49,11 @@ resource "google_compute_instance" "bastion_vm" {
     sudo apt update
     sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin kubectl
     export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    # Install kuztomize
+    sudo snap install kustomize
+    # Install Kapp
+    wget -O- https://carvel.dev/install.sh > install.sh
+    sudo bash install.sh
     EOF
 
   service_account {

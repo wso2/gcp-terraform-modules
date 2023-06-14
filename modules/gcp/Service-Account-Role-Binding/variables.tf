@@ -9,9 +9,15 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_service_account" "service_account" {
-  project      = var.project_name
-  account_id   = join("-", ["svcacc", var.service_account_name, var.environment])
-  display_name = join("-", ["svcacc", var.service_account_name, var.environment])
-  description  = join("", ["Service account :", var.service_account_name, " for ", var.project_name])
+variable "project_name" {
+  description = "The name of the project"
+  type        = string
+}
+variable "service_account_roles" {
+  type        = list(string)
+  description = "The service account roles"
+}
+variable "service_account_email" {
+  description = "The service account email"
+  type        = string
 }
