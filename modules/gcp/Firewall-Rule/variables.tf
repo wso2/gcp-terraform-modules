@@ -17,6 +17,10 @@ variable "rule_name" {
   description = "The firewall rule name"
   type        = string
 }
+variable "environment" {
+  description = "The environment of the firewall rule"
+  type        = string
+}
 variable "vpc_id" {
   description = "The VPN ID"
   type        = string
@@ -40,6 +44,11 @@ variable "deny_rules" {
 variable "priority" {
   description = "The priority of the rule"
   type        = number
+}
+variable "direction" {
+  description = "The direction of the rule"
+  type        = string
+  default     = "INGRESS"
 }
 variable "source_ranges" {
   description = "The source ranges"

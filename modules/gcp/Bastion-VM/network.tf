@@ -9,27 +9,24 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_compute_firewall" "rule" {
-  project            = var.project_name
-  name               = join("-", ["fwr", var.rule_name, var.environment])
-  network            = var.vpc_id
-  priority           = var.priority
-  direction          = var.direction
-  source_ranges      = var.source_ranges
-  destination_ranges = var.destination_ranges
+resource "google_compute_subnetwork" "bastion_subnetwork" {
+  name          = join("-", ["snet", "bastion", var.environment])
+  project       = var.project_name
+  ip_cidr_range = var.bastion_ip_cidr_range
+  region        = var.location
+  network       = var.vpc_name
+}
 
-  dynamic "allow" {
-    for_each = var.allow_rules
-    content {
-      protocol = allow.value.protocol
-      ports    = allow.value.ports
-    }
-  }
-  dynamic "deny" {
-    for_each = var.deny_rules
-    content {
-      protocol = deny.value.protocol
-      ports    = deny.value.ports
-    }
+resource "google_compute_firewall" "allow_ssh_rule" {
+  project            = var.project_name
+  name               = join("-", ["fwr", "bastion-ssh-allow", var.environment])
+  network            = var.vpc_name
+  priority           = "100"
+  source_ranges      = ["0.0.0.0/0"]
+  destination_ranges = [var.bastion_ip_cidr_range]
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
   }
 }
