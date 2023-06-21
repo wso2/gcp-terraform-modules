@@ -10,9 +10,10 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "cluster" {
-  name        = join("-", ["gke", var.project, var.cluster_location])
-  project     = var.project
-  description = join("", ["GKE cluster for ", var.project, " located in ", var.cluster_location])
+  name               = join("-", ["gke", var.project_name, var.cluster_location, var.environment])
+  project            = var.project_name
+  description        = join("", ["GKE cluster for ", var.project_name, " located in ", var.cluster_location, " ENV: ", var.environment])
+  min_master_version = var.master_kubernetes_version
 
   # Regional cluster
   location                  = var.cluster_location
@@ -52,7 +53,7 @@ resource "google_container_cluster" "cluster" {
     }
   }
   workload_identity_config {
-    workload_pool = join(".", [var.project, "svc.id.goog"])
+    workload_pool = join(".", [var.project_name, "svc.id.goog"])
   }
   release_channel {
     channel = "UNSPECIFIED"
@@ -128,11 +129,12 @@ resource "google_container_cluster" "cluster" {
 
 resource "google_container_node_pool" "node_pool" {
   name           = join("", ["gkenpprimary"])
-  project        = var.project
+  project        = var.project_name
   location       = var.node_pool_location
   cluster        = google_container_cluster.cluster.id
   node_count     = var.node_pool_node_count
   node_locations = var.node_pool_zone_locations
+  version        = var.master_kubernetes_version
 
   node_config {
     preemptible     = false

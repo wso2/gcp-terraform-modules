@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_compute_subnetwork" "vpc_subnetwork" {
-  name          = join("-", ["snet", var.vpc_subnetwork_name])
+  name          = join("-", ["snet", var.vpc_subnetwork_name, var.environment])
   project       = var.project_id
   ip_cidr_range = var.ip_cidr_range
   region        = var.region

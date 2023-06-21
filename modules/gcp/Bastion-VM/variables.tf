@@ -9,28 +9,28 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "project" {
-  description = "The project of the bastion VM"
+variable "project_name" {
+  description = "The project name to host the Artifact Repository"
   type        = string
 }
 variable "zone" {
-  description = "The zone of bastion VM"
+  description = "The zone of bastion vm"
   type        = string
 }
 variable "location" {
-  description = "The location of the bastion VM"
+  description = "The location to host the Artifact Repository"
   type        = string
 }
-variable "bastion_service_account_email" {
-  description = "The bastion service account email"
+variable "environment" {
+  description = "The environment of the VPC network"
   type        = string
 }
 variable "vpc_name" {
   description = "The VPC name"
   type        = string
 }
-variable "subnetwork_id" {
-  description = "The subnetwork name"
+variable "bastion_ip_cidr_range" {
+  description = "The IP CIDR range of the bastion subnet"
   type        = string
 }
 variable "ssh_public_key_path" {
@@ -43,7 +43,7 @@ variable "bastion_vm_machine_type" {
   default     = "e2-medium"
 }
 variable "boot_disk_image" {
-  description = "The bastion VM boot disk image"
+  description = "The bastion vm boot disk image"
   type        = string
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }

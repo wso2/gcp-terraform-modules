@@ -9,9 +9,17 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_service_account" "service_account" {
+resource "google_service_account" "service_account_choreo_cp" {
   project      = var.project_name
-  account_id   = join("-", ["svcacc", var.service_account_name, var.environment])
-  display_name = join("-", ["svcacc", var.service_account_name, var.environment])
-  description  = join("", ["Service account named ", var.service_account_name, " for ", var.project_name])
+  account_id   = join("-", ["svcacc", "org-reg", "hub"])
+  display_name = join("-", ["svcacc", "org-reg", "hub"])
+  description  = "Service account for Choreo Org registration"
+}
+resource "google_project_iam_member" "service_account_choreo_cp_role" {
+  project = var.project_name
+  role    = "roles/artifactregistry.writer"
+  member  = join(":", ["serviceAccount", google_service_account.service_account_choreo_cp.email])
+  depends_on = [
+    google_service_account.service_account_choreo_cp
+  ]
 }
