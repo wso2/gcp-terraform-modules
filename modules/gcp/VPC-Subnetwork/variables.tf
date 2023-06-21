@@ -17,6 +17,10 @@ variable "vpc_subnetwork_name" {
   description = "The name of the VPC subnetwork"
   type        = string
 }
+variable "environment" {
+  description = "The environment of the VPC subnetwork"
+  type        = string
+}
 variable "ip_cidr_range" {
   description = "The IP CIDR range of the VPC subnetwork"
   type        = string

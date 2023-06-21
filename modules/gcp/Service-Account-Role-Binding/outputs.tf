@@ -8,10 +8,3 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
-
-resource "google_service_account" "cluster_service_account" {
-  project      = var.project
-  account_id   = join("-", ["svcacc", "gke", var.environment])
-  display_name = join("-", ["svcacc", "gke", var.environment])
-  description  = join("", ["GKE service account for ", var.project, " in ", var.environment, " environment ", "located in ", var.cluster_location])
-}

@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 # GCP setup variables
-variable "project" {
+variable "project_name" {
   description = "The project name"
   type        = string
 }
@@ -79,6 +79,10 @@ variable "master_cluster_ipv4_cidr" {
 }
 variable "master_authorized_networks_cidr" {
   description = "The master authorized networks cidr"
+  type        = string
+}
+variable "master_kubernetes_version" {
+  description = "The master kubernetes version"
   type        = string
 }
 variable "labels" {

@@ -9,9 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_service_account" "cluster_service_account" {
-  project      = var.project
-  account_id   = join("-", ["svcacc", "gke", var.environment])
-  display_name = join("-", ["svcacc", "gke", var.environment])
-  description  = join("", ["GKE service account for ", var.project, " in ", var.environment, " environment ", "located in ", var.cluster_location])
+resource "google_service_account" "bastion_service_account" {
+  project      = var.project_name
+  account_id   = join("-", ["svcacc", "bastion", var.environment])
+  display_name = join("-", ["svcacc", "bastion", var.environment])
+  description  = join("", ["Bastion service account for ", var.project_name])
 }

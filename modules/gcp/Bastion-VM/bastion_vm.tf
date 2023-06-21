@@ -9,9 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 resource "google_compute_instance" "bastion_vm" {
-  name         = join("-", ["vmbastion", var.project, var.location])
-  project      = var.project
-  description  = join(" ", ["Bastion VM for", var.project])
+  name         = join("-", ["vmbastion", var.location, var.environment])
+  project      = var.project_name
+  description  = join(" ", ["Bastion VM for", var.environment])
   machine_type = var.bastion_vm_machine_type
   zone         = var.zone
 
@@ -24,15 +24,15 @@ resource "google_compute_instance" "bastion_vm" {
     }
   }
   network_interface {
-    network = var.vpc_name
-    subnetwork_project = var.project
-    subnetwork = var.subnetwork_id
+    network            = var.vpc_name
+    subnetwork_project = var.project_name
+    subnetwork         = google_compute_subnetwork.bastion_subnetwork.name
 
     access_config {
     }
   }
-  metadata  = {
-   ssh-keys = file(var.ssh_public_key_path)
+  metadata = {
+    ssh-keys = file(var.ssh_public_key_path)
   }
 
   metadata_startup_script = <<-EOF
@@ -49,11 +49,19 @@ resource "google_compute_instance" "bastion_vm" {
     sudo apt update
     sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin kubectl
     export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    # Install Kustomize
+    sudo snap install kustomize
+    # Install Kapp
+    wget -O- https://carvel.dev/install.sh > install.sh
+    sudo bash install.sh
     EOF
 
   service_account {
-    email  = var.bastion_service_account_email
+    email  = google_service_account.bastion_service_account.email
     scopes = ["cloud-platform"]
   }
-
+  depends_on = [
+    google_service_account.bastion_service_account,
+    google_compute_subnetwork.bastion_subnetwork
+  ]
 }

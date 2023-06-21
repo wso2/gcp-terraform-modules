@@ -9,9 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_service_account" "cluster_service_account" {
-  project      = var.project
-  account_id   = join("-", ["svcacc", "gke", var.environment])
-  display_name = join("-", ["svcacc", "gke", var.environment])
-  description  = join("", ["GKE service account for ", var.project, " in ", var.environment, " environment ", "located in ", var.cluster_location])
+resource "google_project_iam_member" "service_account_iam_member" {
+  for_each = { for idx, role in var.service_account_roles : idx => role }
+  project  = var.project_name
+  role     = each.value
+  member   = join(":", ["serviceAccount", var.service_account_email])
 }
