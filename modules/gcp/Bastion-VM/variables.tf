@@ -9,16 +9,16 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "project" {
-  description = "The project name to host the Bastion Instance"
+variable "project_name" {
+  description = "The project name to host the Artifact Repository"
   type        = string
 }
 variable "zone" {
-  description = "The zone of Bastion VM"
+  description = "The zone of bastion vm"
   type        = string
 }
 variable "location" {
-  description = "The location to host the Bastion Instance"
+  description = "The location to host the Artifact Repository"
   type        = string
 }
 variable "environment" {
@@ -33,17 +33,17 @@ variable "bastion_ip_cidr_range" {
   description = "The IP CIDR range of the bastion subnet"
   type        = string
 }
-variable  "ssh_public_key_path" {
-  description = "The directory path to ssh public key"
+variable "ssh_public_key_path" {
+  description = "The path to the ssh public key"
   type        = string
 }
 variable "bastion_vm_machine_type" {
-  description = "The Bastion VM machine type"
+  description = "The bastion VM machine type"
   type        = string
   default     = "e2-medium"
 }
 variable "boot_disk_image" {
-  description = "The Bastion VM boot disk image"
+  description = "The bastion vm boot disk image"
   type        = string
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }

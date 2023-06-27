@@ -54,6 +54,9 @@ resource "google_compute_instance" "bastion_vm" {
     # Install Kapp
     wget -O- https://carvel.dev/install.sh > install.sh
     sudo bash install.sh
+    # Install yq and jq
+    sudo snap install yq
+    sudo apt-get install jq
     EOF
 
   service_account {
