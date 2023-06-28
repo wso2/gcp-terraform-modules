@@ -61,12 +61,12 @@ resource "google_container_cluster" "cluster" {
   cluster_autoscaling {
     enabled = true
     resource_limits {
-      maximum       = 16
+      maximum       = 100
       minimum       = 0
       resource_type = "cpu"
     }
     resource_limits {
-      maximum       = 30
+      maximum       = 300
       minimum       = 0
       resource_type = "memory"
     }

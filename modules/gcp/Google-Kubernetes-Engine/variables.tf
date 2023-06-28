@@ -26,24 +26,21 @@ variable "vpc_id" {
   description = "The vpc id"
   type        = string
 }
-variable "cluster_ipv4_cidr" {
-  description = "The cluster ipv4 cidr"
+variable "master_cluster_ipv4_cidr" {
+  description = "The master cluster ipv4 cidr"
   type        = string
 }
-variable "cluster_primary_subnet_cidr_range" {
-  description = "The cluster primary subnet cidr range"
+variable "cluster_subnetwork_primary_cidr" {
+  description = "The cluster subnet cidr range"
   type        = string
-  default     = "192.30.0.0/15"
 }
-variable "cluster_secondry_pods_cidr_range" {
+variable "cluster_secondary_pods_cidr_range" {
   description = "The cluster secondry pods cidr range"
   type        = string
-  default     = "10.40.0.0/15"
 }
-variable "cluster_secondry_services_cidr_range" {
+variable "cluster_secondary_services_cidr_range" {
   description = "The cluster secondry services cidr range"
   type        = string
-  default     = "10.43.0.0/20"
 }
 variable "node_pool_location" {
   description = "The node pool location"
@@ -72,10 +69,6 @@ variable "node_pool_max_node_count" {
 variable "default_max_pods_per_node" {
   description = "The default max pods per node"
   type        = number
-}
-variable "master_cluster_ipv4_cidr" {
-  description = "The master cluster ipv4 cidr"
-  type        = string
 }
 variable "master_authorized_networks_cidr" {
   description = "The master authorized networks cidr"

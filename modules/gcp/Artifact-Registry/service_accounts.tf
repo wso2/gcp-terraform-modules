@@ -11,8 +11,8 @@
 
 resource "google_service_account" "service_account_choreo_cp" {
   project      = var.project_name
-  account_id   = join("-", ["svcacc", "org-reg", "hub"])
-  display_name = join("-", ["svcacc", "org-reg", "hub"])
+  account_id   = join("-", ["svcacc", "org-reg"])
+  display_name = join("-", ["svcacc", "org-reg"])
   description  = "Service account for Choreo Org registration"
 }
 resource "google_project_iam_member" "service_account_choreo_cp_role" {
