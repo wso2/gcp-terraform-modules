@@ -11,8 +11,8 @@
 
 resource "google_compute_subnetwork" "cluster_subnetwork" {
   name                     = join("-", ["snet", "gke-cluster", var.environment])
-  project                  = var.project
-  ip_cidr_range            = var.cluster_primary_subnet_cidr_range
+  project                  = var.project_name
+  ip_cidr_range            = var.cluster_subnetwork_primary_cidr
   region                   = var.cluster_location
   network                  = var.vpc_id
   private_ip_google_access = true
