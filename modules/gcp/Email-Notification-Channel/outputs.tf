@@ -9,22 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_monitoring_alert_policy" "alert_policy" {
-  display_name = join("-", ["log-alert", var.alert_name, var.alert_environment])
-  combiner     = "OR"
-  enabled      = var.alert_enabled
-  project      = var.project_name
-  conditions {
-    display_name = join("-", ["log-alert", var.alert_name, var.alert_environment])
-    condition_matched_log {
-      filter = var.alert_query
-    }
-  }
-  alert_strategy {
-    auto_close = "300s"
-    notification_rate_limit {
-      period = var.alert_period
-    }
-  }
-  notification_channels = var.notification_channels_ids
+output "email_notification_channel_id" {
+  value      = google_monitoring_notification_channel.notification_channel.id
+  depends_on = [google_monitoring_notification_channel.notification_channel]
 }

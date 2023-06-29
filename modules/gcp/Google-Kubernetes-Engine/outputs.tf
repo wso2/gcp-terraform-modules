@@ -25,6 +25,10 @@ output "gke_cluster_id" {
   value      = google_container_cluster.cluster.id
   depends_on = [google_container_cluster.cluster]
 }
+output "gke_cluster_name" {
+  value      = google_container_cluster.cluster.name
+  depends_on = [google_container_cluster.cluster]
+}
 output "gke_cluster_subnet_id" {
   value      = google_compute_subnetwork.cluster_subnetwork.id
   depends_on = [google_compute_subnetwork.cluster_subnetwork]

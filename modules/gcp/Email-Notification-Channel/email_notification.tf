@@ -9,22 +9,12 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_monitoring_alert_policy" "alert_policy" {
-  display_name = join("-", ["log-alert", var.alert_name, var.alert_environment])
-  combiner     = "OR"
-  enabled      = var.alert_enabled
+resource "google_monitoring_notification_channel" "notification_channel" {
   project      = var.project_name
-  conditions {
-    display_name = join("-", ["log-alert", var.alert_name, var.alert_environment])
-    condition_matched_log {
-      filter = var.alert_query
-    }
+  display_name = join("-", ["nc-email", var.notification_channel_name, var.environment])
+  description  = join("", ["Email notification channel for ", var.notification_channel_name, " in ", var.environment])
+  type         = "email"
+  labels = {
+    email_address = var.notification_email_address
   }
-  alert_strategy {
-    auto_close = "300s"
-    notification_rate_limit {
-      period = var.alert_period
-    }
-  }
-  notification_channels = var.notification_channels_ids
 }

@@ -9,26 +9,31 @@
 #
 # --------------------------------------------------------------------------------------
 
-
-# GLOBAL VARS
-variable "notification_channels_id" {
-  type = string
+variable "project_name" {
+  description = "The project name where the alert needs to be added"
+  type        = string
 }
-
-variable "environment" {
-  type = string
+variable "alert_name" {
+  description = "The alert name"
+  type        = string
 }
-
-variable "cluster_name" {
-  type = string
+variable "alert_environment" {
+  description = "The alert environment"
+  type        = string
 }
-
-variable "email_alert_policy_configs" {
-  type    = string
-  default = []
+variable "alert_query" {
+  description = "The alert query"
+  type        = string
 }
-
-variable "pagerduty_alert_policy_configs" {
-  type    = string
-  default = []
+variable "alert_period" {
+  description = "The alert period"
+  type        = string
+}
+variable "alert_enabled" {
+  description = "The alert enabled"
+  type        = bool
+}
+variable "notification_channels_ids" {
+  description = "The notification channels ids"
+  type        = list(string)
 }

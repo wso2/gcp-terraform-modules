@@ -8,3 +8,10 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+
+output "alert_policy_id" {
+  value = google_monitoring_alert_policy.alert_policy.id
+  depends_on = [
+    google_monitoring_alert_policy.alert_policy
+  ]
+}
