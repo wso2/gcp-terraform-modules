@@ -10,18 +10,18 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_monitoring_alert_policy" "alert_policy" {
-  display_name = join("-", ["log-alert", var.alert_name, var.alert_environment])
+  display_name = join("-", ["[LOG]", var.alert_name, var.alert_environment])
   combiner     = "OR"
   enabled      = var.alert_enabled
   project      = var.project_name
   conditions {
-    display_name = join("-", ["log-alert", var.alert_name, var.alert_environment])
+    display_name = join("-", ["[LOG]", var.alert_name, var.alert_environment])
     condition_matched_log {
       filter = var.alert_query
     }
   }
   alert_strategy {
-    auto_close = "300s"
+    auto_close = "1800s"
     notification_rate_limit {
       period = var.alert_period
     }
