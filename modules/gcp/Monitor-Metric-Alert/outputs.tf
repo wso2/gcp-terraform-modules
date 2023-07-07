@@ -9,15 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "private_dns_managed_zone_id" {
-  value      = google_dns_managed_zone.private_dns_managed_zone.id
-  depends_on = [google_dns_managed_zone.private_dns_managed_zone]
-}
-output "private_dns_managed_zone_name_servers" {
-  value      = google_dns_managed_zone.private_dns_managed_zone.name_servers
-  depends_on = [google_dns_managed_zone.private_dns_managed_zone]
-}
-output "private_dns_managed_zone_name" {
-  value      = google_dns_managed_zone.private_dns_managed_zone.name
-  depends_on = [google_dns_managed_zone.private_dns_managed_zone]
+output "alert_policy_id" {
+  value = google_monitoring_alert_policy.metric_alert_policy.id
+  depends_on = [
+    google_monitoring_alert_policy.metric_alert_policy
+  ]
 }
