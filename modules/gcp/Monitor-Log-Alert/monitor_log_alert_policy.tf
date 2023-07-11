@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_monitoring_alert_policy" "alert_policy" {
-  display_name = join("-", ["[LOG]", var.alert_name, var.alert_environment])
+  display_name = join(" - ", ["[LOG]", var.alert_name, var.alert_environment])
   combiner     = "OR"
   enabled      = var.alert_enabled
   project      = var.project_name
@@ -27,4 +27,8 @@ resource "google_monitoring_alert_policy" "alert_policy" {
     }
   }
   notification_channels = var.notification_channels_ids
+   documentation {
+    content = "Choreo PDP service is outputting logs that contain the word '${var.alert_name}'."
+    mime_type = "text/markdown"
+  }
 }
