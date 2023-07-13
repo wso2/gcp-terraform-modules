@@ -59,31 +59,7 @@ resource "google_container_cluster" "cluster" {
     channel = "UNSPECIFIED"
   }
   cluster_autoscaling {
-    enabled = true
-    resource_limits {
-      maximum       = 100
-      minimum       = 0
-      resource_type = "cpu"
-    }
-    resource_limits {
-      maximum       = 300
-      minimum       = 0
-      resource_type = "memory"
-    }
-    auto_provisioning_defaults {
-      disk_type       = "pd-balanced"
-      image_type      = "COS_CONTAINERD"
-      service_account = google_service_account.cluster_service_account.email
-      management {
-        auto_repair  = true
-        auto_upgrade = false
-      }
-      upgrade_settings {
-        max_surge       = 1
-        max_unavailable = 0
-        strategy        = "SURGE"
-      }
-    }
+    enabled = false
   }
   addons_config {
     horizontal_pod_autoscaling {
