@@ -27,13 +27,8 @@ resource "google_compute_instance" "bastion_vm" {
     network            = var.vpc_name
     subnetwork_project = var.project_name
     subnetwork         = google_compute_subnetwork.bastion_subnetwork.name
-
-    access_config {
-    }
   }
-  metadata = {
-    ssh-keys = file(var.ssh_public_key_path)
-  }
+  metadata = {}
 
   metadata_startup_script = <<-EOF
     #!/bin/bash

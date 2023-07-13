@@ -33,14 +33,10 @@ variable "bastion_ip_cidr_range" {
   description = "The IP CIDR range of the bastion subnet"
   type        = string
 }
-variable "ssh_public_key_path" {
-  description = "The path to the ssh public key"
-  type        = string
-}
 variable "bastion_vm_machine_type" {
   description = "The bastion VM machine type"
   type        = string
-  default     = "e2-medium"
+  default     = "e2-small"
 }
 variable "boot_disk_image" {
   description = "The bastion vm boot disk image"

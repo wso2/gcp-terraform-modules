@@ -24,13 +24,3 @@ resource "google_redis_instance" "memorystore_redis_instance" {
   connect_mode            = "DIRECT_PEERING"
   labels                  = var.labels
 }
-
-resource "google_dns_record_set" "a_record" {
-  project      = var.project_name
-  name         = join("", ["choreo-", var.environment, "-rate-limit.", var.internal_dns_name])
-  managed_zone = var.dns_managed_zone_name
-  type         = "A"
-  ttl          = "300"
-  rrdatas      = [google_redis_instance.memorystore_redis_instance.host]
-  depends_on   = [google_redis_instance.memorystore_redis_instance]
-}

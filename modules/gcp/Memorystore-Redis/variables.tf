@@ -53,10 +53,6 @@ variable "reserved_ip_range" {
   description = "The reserved ip range"
   type        = string
 }
-variable "dns_managed_zone_name" {
-  description = "The DNS managed zone name"
-  type        = string
-}
 variable "internal_dns_name" {
   description = "The dev internal dns name"
   type        = string
