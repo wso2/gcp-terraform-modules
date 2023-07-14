@@ -10,12 +10,12 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_monitoring_alert_policy" "metric_alert_policy" {
-  display_name = join("-", ["[METRIC]", var.alert_name, var.alert_environment])
+  display_name = join("", ["[METRIC][", upper(var.alert_environment), "]", var.alert_name])
   combiner     = "OR"
   enabled      = var.alert_enabled
   project      = var.project_name
   conditions {
-    display_name = join("-", ["[METRIC]", var.alert_name, var.alert_environment])
+    display_name = join("", ["[METRIC][", upper(var.alert_environment), "]", var.alert_name])
     condition_threshold {
       filter          = var.alert_metric_filter
       duration        = var.alert_duration
@@ -23,8 +23,8 @@ resource "google_monitoring_alert_policy" "metric_alert_policy" {
       threshold_value = var.alert_threshold_value
       aggregations {
         alignment_period     = var.alert_alignment_period
-        per_series_aligner   = "ALIGN_MEAN"
-        cross_series_reducer = "REDUCE_MEAN"
+        per_series_aligner   = var.alert_per_series_aligner
+        cross_series_reducer = var.alert_cross_series_reducer
         group_by_fields      = var.alert_group_by_fields
       }
 

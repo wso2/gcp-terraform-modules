@@ -25,7 +25,7 @@ resource "google_monitoring_alert_policy" "node_memory_alert_policy" {
         alignment_period     = var.node_memory_alignment_period
         per_series_aligner   = "ALIGN_MEAN"
         cross_series_reducer = "REDUCE_MEAN"
-        group_by_fields      = ["resource.node_name","resource.cluster_name"]
+        group_by_fields      = ["resource.node_name", "resource.cluster_name"]
       }
 
       trigger {
@@ -55,7 +55,7 @@ resource "google_monitoring_alert_policy" "node_cpu_alert_policy" {
         alignment_period     = var.node_cpu_alignment_period
         per_series_aligner   = "ALIGN_RATE"
         cross_series_reducer = "REDUCE_MEAN"
-        group_by_fields      = ["resource.node_name","resource.cluster_name"]
+        group_by_fields      = ["resource.node_name", "resource.cluster_name"]
       }
 
       trigger {

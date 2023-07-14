@@ -41,8 +41,16 @@ variable "alert_threshold_value" {
   description = "The alert threshold value"
   type        = number
 }
+variable "alert_per_series_aligner" {
+  description = "The alert per series aligner"
+  type        = string
+}
 variable "alert_alignment_period" {
   description = "The alert alignment period"
+  type        = string
+}
+variable "alert_cross_series_reducer" {
+  description = "The alert cross series reducer"
   type        = string
 }
 variable "alert_group_by_fields" {
