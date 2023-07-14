@@ -22,7 +22,7 @@ resource "google_compute_firewall" "allow_ssh_rule" {
   name               = join("-", ["fwr", "bastion-ssh-allow", var.environment])
   network            = var.vpc_name
   priority           = "100"
-  source_ranges      = ["0.0.0.0/0"]
+  source_ranges      = ["35.235.240.0/20"]
   destination_ranges = [var.bastion_ip_cidr_range]
 
   allow {
