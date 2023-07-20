@@ -17,3 +17,7 @@ output "artifact_registry_repository_name" {
   value      = google_artifact_registry_repository.artifact_registry_repository.name
   depends_on = [google_artifact_registry_repository.artifact_registry_repository]
 }
+output "artifact_registry_service_account_name" {
+  value      = google_service_account.service_account_choreo_cp.name
+  depends_on = [google_service_account.service_account_choreo_cp]
+}
