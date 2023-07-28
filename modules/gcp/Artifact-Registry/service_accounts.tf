@@ -15,6 +15,9 @@ resource "google_service_account" "service_account_choreo_cp" {
   display_name = join("-", ["svcacc", "org-reg"])
   description  = "Service account for Choreo Org registration"
 }
+resource "google_service_account_key" "service_account_choreo_cp_key" {
+  service_account_id = google_service_account.service_account_choreo_cp.name
+}
 resource "google_project_iam_member" "service_account_choreo_cp_role" {
   project = var.project_name
   role    = "roles/artifactregistry.writer"
