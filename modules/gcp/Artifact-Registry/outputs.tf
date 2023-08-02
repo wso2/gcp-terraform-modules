@@ -25,3 +25,7 @@ output "artifact_registry_service_account_email" {
   value      = google_service_account.service_account_choreo_cp.email
   depends_on = [google_service_account.service_account_choreo_cp]
 }
+output "artifact_registry_service_account_key" {
+  value     = google_service_account_key.service_account_choreo_cp_key.private_key
+  depends_on = [google_service_account_key.service_account_choreo_cp_key]
+}
