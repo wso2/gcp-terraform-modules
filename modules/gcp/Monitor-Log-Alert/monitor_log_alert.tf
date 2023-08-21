@@ -10,21 +10,26 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_monitoring_alert_policy" "alert_policy" {
-  display_name = join(" - ", ["[LOG]", var.alert_name, var.alert_environment])
+  display_name = join("", ["[LOG][", upper(var.alert_environment), "]", var.alert_name])
   combiner     = "OR"
   enabled      = var.alert_enabled
   project      = var.project_name
   conditions {
-    display_name = join("-", ["[LOG]", var.alert_name, var.alert_environment])
-    condition_matched_log {
-      filter = var.alert_query
+    display_name = join("", ["[LOG][", upper(var.alert_environment), "]", var.alert_name])
+    condition_threshold {
+      filter          = "resource.type = \"k8s_container\" AND resource.labels.cluster_name = \"${var.cluster_name}\" AND metric.type = \"logging.googleapis.com/user/${var.alert_metric_name}\"" 
+      duration        = "0s"
+      threshold_value = var.alert_threshold_value
+      comparison      = "COMPARISON_GT"
+      aggregations {
+        alignment_period = var.alert_condition_duration
+        cross_series_reducer = "REDUCE_NONE"
+        per_series_aligner = "ALIGN_COUNT"
+      }
     }
   }
   alert_strategy {
     auto_close = "1800s"
-    notification_rate_limit {
-      period = var.alert_period
-    }
   }
   notification_channels = var.notification_channels_ids
   documentation {
