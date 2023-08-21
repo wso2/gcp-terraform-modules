@@ -52,6 +52,8 @@ resource "google_compute_instance" "bastion_vm" {
     # Install yq and jq
     sudo snap install yq
     sudo apt-get install jq
+    # Intsall Unzip
+    sudo apt install unzip
     EOF
 
   service_account {

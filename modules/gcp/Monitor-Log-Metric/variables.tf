@@ -17,31 +17,7 @@ variable "alert_name" {
   description = "The alert name"
   type        = string
 }
-variable "alert_environment" {
-  description = "The alert environment"
+variable "alert_query" {
+  description = "The alert query"
   type        = string
-}
-variable "alert_enabled" {
-  description = "The alert enabled"
-  type        = bool
-}
-variable "notification_channels_ids" {
-  description = "The notification channels ids"
-  type        = list(string)
-}
-variable "alert_metric_name" {
-  description = "The alert metric name"
-  type        = string
-}
-variable "cluster_name" {
-  description = "The cluster name"
-  type        = string
-}
-variable "alert_condition_duration" {
-  description = "The alert condition duration"
-  type        = string
-}
-variable "alert_threshold_value" {
-  description = "The alert threshold value"
-  type        = number
 }
