@@ -15,6 +15,12 @@ output "memorystore_redis_instance_id" {
     google_redis_instance.memorystore_redis_instance
   ]
 }
+output "memorystore_redis_instance_name" {
+  value = google_redis_instance.memorystore_redis_instance.name
+  depends_on = [
+    google_redis_instance.memorystore_redis_instance
+  ]
+}
 output "memorystore_redis_instance_host" {
   value = google_redis_instance.memorystore_redis_instance.host
   depends_on = [
