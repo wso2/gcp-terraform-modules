@@ -9,7 +9,6 @@
 #
 # --------------------------------------------------------------------------------------
 
-
 resource "google_monitoring_alert_policy" "memory_container_alert_policy" {
   display_name = join("-", ["[ALERT POLICY] - GKE Container Memory", var.environment, var.scope])
   combiner     = "OR"

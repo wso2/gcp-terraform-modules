@@ -14,18 +14,18 @@ variable "project_name" {
   type        = string
 }
 variable "a_record_name" {
-  description = "The A Record name"
+  description = "The DNS A Record name"
   type        = string
 }
 variable "managed_zone_name" {
-  description = "The managed zone name"
+  description = "The managed zone name of the DNS A Record"
   type        = string
 }
 variable "ttl" {
-  description = "The time to live value of the a record"
+  description = "The time to live value of the DNS A record"
   type        = string
 }
 variable "rrdatas" {
   type        = list(string)
-  description = "List of IPv4 Addresses."
+  description = "List of IPv4 Addresses of the DNS A Record"
 }

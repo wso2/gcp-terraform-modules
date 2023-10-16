@@ -9,9 +9,8 @@
 #
 # --------------------------------------------------------------------------------------
 
-# GCP setup variables
 variable "project_name" {
-  description = "The project name"
+  description = "The project name of the GKE cluster"
   type        = string
 }
 variable "environment" {
@@ -23,7 +22,7 @@ variable "cluster_location" {
   type        = string
 }
 variable "vpc_id" {
-  description = "The vpc id"
+  description = "The VPC id of the cluster"
   type        = string
 }
 variable "master_cluster_ipv4_cidr" {
@@ -75,10 +74,10 @@ variable "master_authorized_networks_cidr" {
   type        = string
 }
 variable "master_kubernetes_version" {
-  description = "The master kubernetes version"
+  description = "The master Kubernetes version"
   type        = string
 }
 variable "labels" {
-  description = "The labels"
+  description = "The labels for the cluster"
   type        = map(string)
 }

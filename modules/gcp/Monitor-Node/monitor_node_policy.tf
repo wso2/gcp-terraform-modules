@@ -9,7 +9,6 @@
 #
 # --------------------------------------------------------------------------------------
 
-
 # GKE ALERT POLICY - Node Memory
 resource "google_monitoring_alert_policy" "node_memory_alert_policy" {
   display_name = join("-", ["[ALERT POLICY] - GKE Node Memory", var.environment])
@@ -38,7 +37,6 @@ resource "google_monitoring_alert_policy" "node_memory_alert_policy" {
     var.notification_channels_id
   ]
 }
-
 
 # GKE ALERT POLICY - Node CPU
 resource "google_monitoring_alert_policy" "node_cpu_alert_policy" {

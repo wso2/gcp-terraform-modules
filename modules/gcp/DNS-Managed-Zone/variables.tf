@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The project name"
+  description = "The project name of the DNS Managed Zone"
   type        = string
 }
 variable "dns_zone_name" {

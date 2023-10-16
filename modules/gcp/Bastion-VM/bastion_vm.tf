@@ -8,6 +8,7 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+
 resource "google_compute_instance" "bastion_vm" {
   name         = join("-", ["vmbastion", var.location, var.environment])
   project      = var.project_name

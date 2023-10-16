@@ -10,18 +10,18 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The project name to host the GAR"
+  description = "The GCP project name the Google Artifact Registry"
   type        = string
 }
 variable "environment" {
-  description = "The environment name of GAR"
+  description = "The environment name of the Google Artifact Registry"
   type        = string
 }
 variable "location" {
-  description = "The location to host the GAR"
+  description = "The location of the Google Artifact Registry"
   type        = string
 }
 variable "labels" {
-  description = "The labels of the GAR"
+  description = "The labels of the Google Artifact Registry"
   type        = map(string)
 }

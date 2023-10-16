@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The project name"
+  description = "The project name of the firewall rule"
   type        = string
 }
 variable "rule_name" {
@@ -22,7 +22,7 @@ variable "environment" {
   type        = string
 }
 variable "vpc_id" {
-  description = "The VPN ID"
+  description = "The VPN ID of the firewall rule"
   type        = string
 }
 variable "allow_rules" {

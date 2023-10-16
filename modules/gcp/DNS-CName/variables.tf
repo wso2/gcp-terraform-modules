@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The Project Name to add the DNS A Record"
+  description = "The project name to add the DNS C Record"
   type        = string
 }
 variable "c_name_record_name" {
@@ -18,14 +18,14 @@ variable "c_name_record_name" {
   type        = string
 }
 variable "managed_zone_name" {
-  description = "The managed zone name"
+  description = "The managed zone name of the DNS CName record"
   type        = string
 }
 variable "ttl" {
-  description = "The time to live value of the a record"
+  description = "The time to live value of the DNS CName record"
   type        = string
 }
 variable "rrdatas" {
   type        = list(string)
-  description = "List of IPv4 Addresses."
+  description = "List of IPv4 Addresses of the DNS CName Record"
 }
