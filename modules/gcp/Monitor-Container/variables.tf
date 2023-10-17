@@ -9,7 +9,6 @@
 #
 # --------------------------------------------------------------------------------------
 
-
 # GLOBAL VARS
 variable "notification_channels_id" {
   type = string

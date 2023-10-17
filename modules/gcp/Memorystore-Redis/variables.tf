@@ -10,35 +10,35 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The project name where the alert needs to be added"
+  description = "The project name where the Redis should to be added"
   type        = string
 }
 variable "tier" {
-  description = "The redis tier"
+  description = "The Redis tier"
   type        = string
 }
 variable "environment" {
-  description = "The redis environment"
+  description = "The Redis environment"
   type        = string
 }
 variable "redis_name" {
-  description = "The memorystore redis name"
+  description = "The memorystore Redis name"
   type        = string
 }
 variable "redis_version" {
-  description = "The redis version"
+  description = "The Redis version"
   type        = string
 }
 variable "region" {
-  description = "The redis region"
+  description = "The Redis region"
   type        = string
 }
 variable "zone" {
-  description = "The redis zone"
+  description = "The Redis zone"
   type        = string
 }
 variable "vpc_id" {
-  description = "The vpc id"
+  description = "The VPC id"
   type        = string
 }
 variable "labels" {

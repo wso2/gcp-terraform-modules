@@ -10,11 +10,11 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The project name"
+  description = "The project name of the NAT gateway"
   type        = string
 }
 variable "environment" {
-  description = "The environment to be used for naming"
+  description = "The environment of the NAT gateway"
   type        = string
 }
 variable "region" {

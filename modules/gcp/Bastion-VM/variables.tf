@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 variable "project_name" {
-  description = "The project name to host the Artifact Repository"
+  description = "The project name of the bastion VM"
   type        = string
 }
 variable "zone" {
@@ -18,15 +18,15 @@ variable "zone" {
   type        = string
 }
 variable "location" {
-  description = "The location to host the Artifact Repository"
+  description = "The location of the bastion VM"
   type        = string
 }
 variable "environment" {
-  description = "The environment of the VPC network"
+  description = "The environment of the bastion VM"
   type        = string
 }
 variable "vpc_name" {
-  description = "The VPC name"
+  description = "The VPC name in which the bastion VM will be created"
   type        = string
 }
 variable "bastion_ip_cidr_range" {
