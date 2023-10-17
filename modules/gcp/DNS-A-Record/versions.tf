@@ -9,19 +9,12 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "project_name" {
-  description = "The project name of the DNS Managed Zone"
-  type        = string
-}
-variable "dns_zone_name" {
-  description = "The Managed DNS Zone name"
-  type        = string
-}
-variable "dns_name" {
-  description = "The DNS domain name of the Private DNS Zone"
-  type        = string
-}
-variable "labels" {
-  description = "The labels to add to the DNS Managed Zone"
-  type        = map(string)
+terraform {
+  required_version = ">= v0.14.10"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.51.0"
+    }
+  }
 }

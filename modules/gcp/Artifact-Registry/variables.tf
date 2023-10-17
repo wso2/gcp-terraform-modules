@@ -13,10 +13,6 @@ variable "project_name" {
   description = "The GCP project name the Google Artifact Registry"
   type        = string
 }
-variable "environment" {
-  description = "The environment name of the Google Artifact Registry"
-  type        = string
-}
 variable "location" {
   description = "The location of the Google Artifact Registry"
   type        = string

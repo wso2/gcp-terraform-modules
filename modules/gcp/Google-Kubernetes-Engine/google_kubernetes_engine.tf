@@ -123,9 +123,7 @@ resource "google_container_node_pool" "node_pool" {
     metadata = {
       "disable-legacy-endpoints" = "true"
     }
-    labels = {
-      "node-pool" = "primary"
-    }
+    labels = var.labels
   }
   management {
     auto_repair  = true
