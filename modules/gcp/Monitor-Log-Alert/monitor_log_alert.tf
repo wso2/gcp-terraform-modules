@@ -17,14 +17,14 @@ resource "google_monitoring_alert_policy" "alert_policy" {
   conditions {
     display_name = join("", ["[LOG][", upper(var.alert_environment), "]", var.alert_name])
     condition_threshold {
-      filter          = "resource.type = \"k8s_container\" AND resource.labels.cluster_name = \"${var.cluster_name}\" AND metric.type = \"logging.googleapis.com/user/${var.alert_metric_name}\"" 
+      filter          = "resource.type = \"k8s_container\" AND resource.labels.cluster_name = \"${var.cluster_name}\" AND metric.type = \"logging.googleapis.com/user/${var.alert_metric_name}\""
       duration        = "0s"
       threshold_value = var.alert_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
-        alignment_period = var.alert_condition_duration
+        alignment_period     = var.alert_condition_duration
         cross_series_reducer = "REDUCE_NONE"
-        per_series_aligner = "ALIGN_COUNT"
+        per_series_aligner   = "ALIGN_COUNT"
       }
     }
   }
