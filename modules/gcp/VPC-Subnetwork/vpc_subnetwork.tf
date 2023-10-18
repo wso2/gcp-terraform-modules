@@ -8,7 +8,10 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+# Ignore: AVD-GCP-0029(https://avd.aquasec.com/misconfig/avd-gcp-0029)
+# Reason: If flow logs are needed we need to create a sperate module containing the flow logs as there are multiple paramters for flow log configuration.
 
+# trivy:ignore:AVD-GCP-0029
 resource "google_compute_subnetwork" "vpc_subnetwork" {
   name          = join("-", ["snet", var.vpc_subnetwork_name, var.environment])
   project       = var.project_id

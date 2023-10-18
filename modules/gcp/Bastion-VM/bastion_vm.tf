@@ -8,7 +8,13 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+# Ignore: AVD-GCP-0030(https://avd.aquasec.com/misconfig/avd-gcp-0030)
+# Reason: IDP is enabled for the bastion VM. SSH keys are not used for authentication.
+# Ignore: AVD-GCP-0033(https://avd.aquasec.com/misconfig/avd-gcp-0033)
+# Reason: Encryption is enabled and by default GCP managed key is used.
 
+# trivy:ignore:AVD-GCP-0030
+# trivy:ignore:AVD-GCP-0033
 resource "google_compute_instance" "bastion_vm" {
   name         = join("-", ["vmbastion", var.location, var.environment])
   project      = var.project_name
@@ -28,6 +34,9 @@ resource "google_compute_instance" "bastion_vm" {
     network            = var.vpc_name
     subnetwork_project = var.project_name
     subnetwork         = google_compute_subnetwork.bastion_subnetwork.name
+  }
+  shielded_instance_config {
+    enable_vtpm                 = true
   }
   metadata = {}
 
