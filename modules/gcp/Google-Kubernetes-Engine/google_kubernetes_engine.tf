@@ -9,7 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 # Ignore: AVD-GCP-0051 (https://avd.aquasec.com/misconfig/avd-gcp-0051)
-# Reason: The labels are added via a required variable. When using the module, the labels are added from the implementation.
+# Reason: The cluster labels(tags) are added via a required variable in the module. When using the module, the labels are added from the implementation.
 # Ignore: AVD-GCP-0056 (https://avd.aquasec.com/misconfig/avd-gcp-0056)
 # Reason: Network-Policies are enabled from the Helm level. Not when provisioning the cluster.
 # Ignore: AVD-GCP-0058 (https://avd.aquasec.com/misconfig/avd-gcp-0058)
