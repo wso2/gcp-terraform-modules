@@ -131,7 +131,7 @@ resource "google_container_node_pool" "node_pool" {
     disk_size_gb    = 100
     disk_type       = "pd-balanced"
     metadata = {
-      "disable-legacy-endpoints" = "true"
+      disable-legacy-endpoints = true
     }
     labels = var.labels
   }
