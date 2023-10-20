@@ -19,6 +19,6 @@ resource "google_dns_managed_zone" "dns_managed_zone" {
   project     = var.project_name
   labels      = var.labels
   dnssec_config {
-     state = var.dnssec_state
-   }
+    state = var.dnssec_state
+  }
 }
