@@ -9,7 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 # Ignore: AVD-GCP-0029(https://avd.aquasec.com/misconfig/avd-gcp-0029)
-# Reason: Flow log enabling is optional due to high cost. It's because for lower environments, it's not mandetory to enable flow logs.
+# Reason: Flow log enabling is optional due to high cost.
 
 # trivy:ignore:AVD-GCP-0029
 resource "google_compute_subnetwork" "vpc_subnetwork" {
