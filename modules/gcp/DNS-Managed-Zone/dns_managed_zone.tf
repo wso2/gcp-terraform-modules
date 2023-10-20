@@ -8,11 +8,17 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+# Ignore: AVD-GCP-0013(https://avd.aquasec.com/misconfig/avd-gcp-0013)
+# Reason: DNSSEC can be enabled or disabled based on the requirement.
 
+# trivy:ignore:AVD-GCP-0013
 resource "google_dns_managed_zone" "dns_managed_zone" {
   name        = join("-", ["dnsz", var.project_name, var.dns_zone_name])
   dns_name    = var.dns_name
   description = join(" ", ["The DNS zone for", var.dns_name])
   project     = var.project_name
   labels      = var.labels
+  dnssec_config {
+     state = var.dnssec_state
+   }
 }
