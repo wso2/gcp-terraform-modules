@@ -19,7 +19,7 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   region        = var.region
   network       = var.vpc_id
   description   = join(" ", ["Subnetwork of", var.vpc_id, " in ", var.region, ])
-  
+
   dynamic "log_config" {
     count = var.enable_flow_logs ? 1 : 0
     content {
