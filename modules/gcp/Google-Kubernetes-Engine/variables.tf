@@ -81,3 +81,23 @@ variable "labels" {
   description = "The labels for the cluster"
   type        = map(string)
 }
+variable "enable_flow_logs" {
+  description = "Enable flow logs of the VPC subnetwork"
+  type        = bool
+  default     = false
+}
+variable "aggregation_interval" {
+  description = "Aggregation interval of the VPC subnetwork logs"
+  type        = string
+  default     = "INTERVAL_10_MIN"
+}
+variable "flow_sampling" {
+  description = "Flow sampling of the VPC subnetwork logs"
+  type        = number
+  default     = 0.5
+}
+variable "metadata" {
+  description = "Metadata of the VPC subnetwork logs"
+  type        = string
+  default     = "INCLUDE_ALL_METADATA"
+}

@@ -9,7 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 # Ignore: AVD-GCP-0029(https://avd.aquasec.com/misconfig/avd-gcp-0029)
-# Reason: If flow logs are needed we need to create a sperate module containing the flow logs as there are multiple paramters for flow log configuration.
+# Reason: Flow log enabling is optional due to high cost.
 
 # trivy:ignore:AVD-GCP-0029
 resource "google_compute_subnetwork" "cluster_subnetwork" {
@@ -26,5 +26,14 @@ resource "google_compute_subnetwork" "cluster_subnetwork" {
   secondary_ip_range {
     range_name    = "cluster-services"
     ip_cidr_range = var.cluster_secondary_services_cidr_range
+  }
+
+  dynamic "log_config" {
+    count = var.enable_flow_logs ? 1 : 0
+    content {
+      aggregation_interval = var.aggregation_interval
+      flow_sampling        = var.flow_sampling
+      metadata             = var.metadata
+    }
   }
 }
