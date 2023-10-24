@@ -39,7 +39,7 @@ resource "google_compute_instance" "bastion_vm" {
     subnetwork         = google_compute_subnetwork.bastion_subnetwork.name
   }
   shielded_instance_config {
-    enable_vtpm = true
+    enable_vtpm        = true
     enable_secure_boot = var.enable_secure_boot
   }
   metadata = {}
