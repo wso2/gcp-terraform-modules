@@ -8,7 +8,10 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+# Ignore: AVD-GCP-0029(https://avd.aquasec.com/misconfig/avd-gcp-0029)
+# Reason: Flow log enabling is optional due to high cost.
 
+# trivy:ignore:AVD-GCP-0029
 resource "google_compute_subnetwork" "cluster_subnetwork" {
   name                     = join("-", ["snet", "gke-cluster", var.environment])
   project                  = var.project_name
@@ -23,5 +26,14 @@ resource "google_compute_subnetwork" "cluster_subnetwork" {
   secondary_ip_range {
     range_name    = "cluster-services"
     ip_cidr_range = var.cluster_secondary_services_cidr_range
+  }
+
+  dynamic "log_config" {
+    count = var.enable_flow_logs ? 1 : 0
+    content {
+      aggregation_interval = var.aggregation_interval
+      flow_sampling        = var.flow_sampling
+      metadata             = var.metadata
+    }
   }
 }

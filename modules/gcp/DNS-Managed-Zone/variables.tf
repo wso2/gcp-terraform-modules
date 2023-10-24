@@ -21,6 +21,11 @@ variable "dns_name" {
   description = "The DNS domain name of the Private DNS Zone"
   type        = string
 }
+variable "dnssec_state" {
+  description = "The state of DNSSEC"
+  type        = string
+  default     = "off"
+}
 variable "labels" {
   description = "The labels to add to the DNS Managed Zone"
   type        = map(string)
