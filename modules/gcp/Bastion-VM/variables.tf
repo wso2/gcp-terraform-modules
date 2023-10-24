@@ -63,3 +63,8 @@ variable "metadata" {
   type        = string
   default     = "INCLUDE_ALL_METADATA"
 }
+variable "enable_secure_boot" {
+  description = "Enable secure boot of the bastion VM"
+  type        = bool
+  default     = false
+}
