@@ -9,7 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 # Ignore: AVD-GCP-0013(https://avd.aquasec.com/misconfig/avd-gcp-0013)
-# Reason: DNSSEC can be enabled or disabled based on the requirement.
+# Reason: DNSSEC can be enabled based on the requirement. This is disabled by default.
 
 # trivy:ignore:AVD-GCP-0013
 resource "google_dns_managed_zone" "dns_managed_zone" {
