@@ -8,3 +8,8 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+
+output "secret_id" {
+  value      = google_secret_manager_secret.secret.id
+  depends_on = [google_secret_manager_secret.secret]
+}

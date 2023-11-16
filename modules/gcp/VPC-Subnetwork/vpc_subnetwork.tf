@@ -21,7 +21,7 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   description   = join(" ", ["Subnetwork of", var.vpc_id, " in ", var.region, ])
 
   dynamic "log_config" {
-    count = var.enable_flow_logs ? 1 : 0
+    for_each = var.enable_flow_logs ? [1] : []
     content {
       aggregation_interval = var.aggregation_interval
       flow_sampling        = var.flow_sampling
