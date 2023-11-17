@@ -68,3 +68,32 @@ variable "enable_secure_boot" {
   type        = bool
   default     = false
 }
+variable "metadata_startup_script" {
+  description = "Startup script of the bastion VM"
+  type        = string
+  default     =  <<-EOF
+    #!/bin/bash
+    sudo apt update
+    sudo apt-get update
+    # Install Helm
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+    # Install kubectl
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    sudo apt update
+    sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin kubectl
+    export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    # Install Kustomize
+    sudo snap install kustomize
+    # Install Kapp
+    wget -O- https://carvel.dev/install.sh > install.sh
+    sudo bash install.sh
+    # Install yq and jq
+    sudo snap install yq
+    sudo apt-get install jq
+    # Intsall Unzip
+    sudo apt install unzip
+    EOF
+}
