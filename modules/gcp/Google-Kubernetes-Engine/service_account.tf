@@ -15,3 +15,10 @@ resource "google_service_account" "cluster_service_account" {
   display_name = join("-", ["svcacc", "gke", var.environment])
   description  = join("", ["GKE service account for ", var.project_name, " in ", var.environment, " environment ", "located in ", var.cluster_location])
 }
+
+resource "google_project_iam_member" "role_bindings" {
+  count   = length(var.roles)
+  project = var.project_name
+  role    = var.roles[count.index]
+  member  = "serviceAccount:${google_service_account.cluster_service_account.email}"
+}

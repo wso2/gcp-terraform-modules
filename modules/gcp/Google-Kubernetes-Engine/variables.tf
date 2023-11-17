@@ -101,3 +101,8 @@ variable "metadata" {
   type        = string
   default     = "INCLUDE_ALL_METADATA"
 }
+variable "roles" {
+  description = "List of roles to assign"
+  type        = list(string)
+  default     = []
+}
