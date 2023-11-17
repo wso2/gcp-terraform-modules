@@ -104,5 +104,5 @@ variable "metadata" {
 variable "roles" {
   description = "List of roles to assign"
   type        = list(string)
-  default = []
+  default     = []
 }

@@ -71,7 +71,7 @@ variable "enable_secure_boot" {
 variable "metadata_startup_script" {
   description = "Startup script of the bastion VM"
   type        = string
-  default     =  <<-EOF
+  default     = <<-EOF
     #!/bin/bash
     sudo apt update
     sudo apt-get update
