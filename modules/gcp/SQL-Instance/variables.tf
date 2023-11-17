@@ -71,11 +71,6 @@ variable "db_ipv4_enabled" {
   type        = bool
 }
 
-variable "db_cidr_range" {
-  description = "DB CIDR range"
-  type        = string
-}
-
 variable "require_ssl" {
   description = "Require SSL for DB connections"
   type        = bool
