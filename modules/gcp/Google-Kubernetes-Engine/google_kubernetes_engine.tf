@@ -18,7 +18,7 @@
 # trivy:ignore:AVD-GCP-0051
 # trivy:ignore:AVD-GCP-0056
 resource "google_container_cluster" "cluster" {
-  name               = join("-", ["gke", var.project_name, var.cluster_location, var.environment])
+  name               = join("-", ["gke", var.project_name, var.project_region_short_name, var.environment])
   project            = var.project_name
   description        = join("", ["GKE cluster for ", var.project_name, " located in ", var.cluster_location, " ENV: ", var.environment])
   min_master_version = var.master_kubernetes_version
