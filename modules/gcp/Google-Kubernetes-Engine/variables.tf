@@ -21,6 +21,10 @@ variable "cluster_location" {
   description = "The location name"
   type        = string
 }
+variable "project_region_short_name" {
+  description = "The short name of the project region"
+  type        = string
+}
 variable "vpc_id" {
   description = "The VPC id of the cluster"
   type        = string
