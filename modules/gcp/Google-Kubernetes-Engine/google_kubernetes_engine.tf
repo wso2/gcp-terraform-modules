@@ -77,7 +77,7 @@ resource "google_container_cluster" "cluster" {
       disabled = false
     }
     gcp_filestore_csi_driver_config {
-      enabled = true
+      enabled = false
     }
     gke_backup_agent_config {
       enabled = true
