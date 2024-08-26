@@ -105,6 +105,9 @@ resource "google_container_cluster" "cluster" {
       "WORKLOADS"
     ]
   }
+  managed_prometheus {
+    enabled = false
+  }
 
   depends_on = [
     google_compute_subnetwork.cluster_subnetwork,
