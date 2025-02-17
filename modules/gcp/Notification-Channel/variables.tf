@@ -14,12 +14,23 @@ variable "environment" {
   type        = string
 }
 
+variable "project_name" {
+  description = "Project name"
+  type        = string
+}
+
 variable "channel_name" {
   description = "Channel name"
   type        = string
 }
 
-variable "alert_email_address" {
-  description = "Alert email address"
+variable "chanel_type" {
+  description = "Channel type"
+  default     = "email"
   type        = string
+}
+
+variable "notification_label" {
+  description = "Notification labels"
+  type        = map(string)
 }
