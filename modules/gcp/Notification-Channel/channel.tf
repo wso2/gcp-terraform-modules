@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_monitoring_notification_channel" "channel" {
+  project      = var.project_name
   display_name = join("-", [var.environment, var.chanel_type, var.project_name, var.channel_name])
   description  = join("", ["Email notification channel for ", var.channel_name, " in ", var.environment])
   type         = var.chanel_type
