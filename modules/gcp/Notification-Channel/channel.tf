@@ -9,11 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_monitoring_notification_channel" "email_channel" {
-  display_name = join("-", [var.environment, "email", var.channel_name])
+resource "google_monitoring_notification_channel" "channel" {
+  display_name = join("-", [var.environment, var.chanel_type, var.project_name, var.channel_name])
   description  = join("", ["Email notification channel for ", var.channel_name, " in ", var.environment])
-  type         = "email"
-  labels = {
-    email_address = var.alert_email_address
-  }
+  type         = var.chanel_type
+  labels       = var.notification_label
 }

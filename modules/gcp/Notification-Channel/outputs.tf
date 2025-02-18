@@ -9,6 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "name" {
-  value = google_monitoring_notification_channel.email_channel.name
+output "channel_name" {
+  value = google_monitoring_notification_channel.channel.name
+}
+output "channel_id" {
+  value = google_monitoring_notification_channel.channel.id
 }
