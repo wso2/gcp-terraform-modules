@@ -25,3 +25,23 @@ variable "vpc_name" {
   description = "The VPC name"
   type        = string
 }
+variable "enable_endpoint_independent_mapping" {
+  description = "Enable endpoint independent mapping"
+  type        = bool
+  default     = false
+}
+variable "max_ports_per_vm" {
+  description = "The maximum number of ports per VM"
+  type        = number
+  default     = 65535
+}
+variable "min_ports_per_vm" {
+  description = "The minimum number of ports per VM"
+  type        = number
+  default     = 64
+}
+variable "nat_ip_allocate_option" {
+  description = "The NAT IP allocation option"
+  type        = string
+  default     = "AUTO_ONLY"
+}
