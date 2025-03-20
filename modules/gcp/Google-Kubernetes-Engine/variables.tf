@@ -138,3 +138,8 @@ variable "managed_prometheus_enabled" {
   type        = bool
   default     = false
 }
+variable "enabled_monitoring_components" {
+  description = "List of monitoring components to enable"
+  type        = list(string)
+  default     = []
+}
