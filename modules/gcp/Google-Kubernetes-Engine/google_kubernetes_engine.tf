@@ -105,8 +105,10 @@ resource "google_container_cluster" "cluster" {
       "WORKLOADS"
     ]
   }
-  managed_prometheus {
-    enabled = false
+  monitoring_config{
+    managed_prometheus {
+      enabled = var.managed_prometheus_enabled
+    }
   }
 
   depends_on = [
