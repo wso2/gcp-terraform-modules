@@ -133,3 +133,8 @@ variable "taint_settings" {
     effect = string
   }))
 }
+variable "managed_prometheus_enabled" {
+  description = "Whether to enable managed Prometheus"
+  type        = bool
+  default     = false
+}
