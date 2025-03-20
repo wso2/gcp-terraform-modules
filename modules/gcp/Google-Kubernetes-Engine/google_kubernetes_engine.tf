@@ -106,6 +106,7 @@ resource "google_container_cluster" "cluster" {
     ]
   }
   monitoring_config{
+    enable_components = var.enabled_monitoring_components
     managed_prometheus {
       enabled = var.managed_prometheus_enabled
     }
