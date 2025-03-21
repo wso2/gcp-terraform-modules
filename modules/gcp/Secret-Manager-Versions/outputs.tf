@@ -8,13 +8,3 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
-
-resource "google_secret_manager_secret" "secrets" {
-  project   = var.project_name
-  for_each  = { for secret in var.secrets : secret.name => secret }
-  secret_id = each.value.name
-  replication {
-    auto {}
-  }
-  labels = var.labels
-}

@@ -9,12 +9,12 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_secret_manager_secret" "secrets" {
-  project   = var.project_name
-  for_each  = { for secret in var.secrets : secret.name => secret }
-  secret_id = each.value.name
-  replication {
-    auto {}
+terraform {
+  required_version = ">= v0.14.10"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 6.25.0"
+    }
   }
-  labels = var.labels
 }
