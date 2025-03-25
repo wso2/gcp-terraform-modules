@@ -8,8 +8,3 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
-
-output "name" {
-  value = { for k, v in google_secret_manager_secret_version.secret_version : k => v.id }
-  depends_on = [google_secret_manager_secret_version.secret_version]
-}
