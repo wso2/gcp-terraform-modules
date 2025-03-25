@@ -8,3 +8,7 @@
 # You may not alter or remove any copyright or other notice from copies of this content.
 #
 # --------------------------------------------------------------------------------------
+
+output "secret_ids" {
+    value = { for s in google_secret_manager_secret.secrets : s.secret_id => s.id }
+}
