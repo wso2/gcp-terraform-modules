@@ -13,10 +13,14 @@ variable "project_name" {
   description = "The name of the project"
   type        = string
 }
-variable "secrets" {
-  type        = list(map(string))
-  description = "The list of the secrets"
-  default     = []
+variable "secret_versions" {
+  type = list(object({
+    secret_name = string
+    secret_data = string
+  }))
+}
+variable "existing_secret_ids" {
+  type = map(string)
 }
 variable "labels" {
   description = "The labels"

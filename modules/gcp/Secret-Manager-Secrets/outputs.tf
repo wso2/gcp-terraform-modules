@@ -10,5 +10,5 @@
 # --------------------------------------------------------------------------------------
 
 output "secret_ids" {
-    value = { for s in google_secret_manager_secret.secrets : s.secret_id => s.id }
+    value       = { for k, v in google_secret_manager_secret.secrets : k => v.id }
 }
