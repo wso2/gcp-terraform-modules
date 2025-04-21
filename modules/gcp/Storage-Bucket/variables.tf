@@ -40,3 +40,8 @@ variable "environment" {
   description = "The environment for the storage bucket"
   type        = string
 }
+
+variable "project_name" {
+  description = "The name of the project"
+  type        = string
+}
