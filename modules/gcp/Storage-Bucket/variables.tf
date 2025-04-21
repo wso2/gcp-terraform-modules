@@ -32,8 +32,7 @@ variable "uniform_bucket_level_access" {
 
 variable "public_access_prevention" {
   description = "Whether to enable public access prevention"
-  type        = bool
-  default     = false
+  type        = string
 }
 
 variable "environment" {
