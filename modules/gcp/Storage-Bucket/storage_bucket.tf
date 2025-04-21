@@ -12,6 +12,7 @@
 resource "google_storage_bucket" "storage_bucket" {
   name                        = join("-", ["sb", var.storage_bucket_name, var.environment])
   location                    = var.location
+  project                     = var.project_name
   storage_class               = var.storage_class
   uniform_bucket_level_access = var.uniform_bucket_level_access
   public_access_prevention    = var.public_access_prevention
