@@ -21,10 +21,6 @@ variable "ip_name" {
   description = "The IP name"
   type        = string
 }
-variable "ip_version" {
-  description = "The IP version"
-  type        = string
-}
 variable "network_tier" {
   description = "The network tier"
   type        = string
