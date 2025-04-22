@@ -12,6 +12,5 @@
 resource "google_compute_address" "ip_address" {
   name         = join("-", [var.project_name, var.environment, var.ip_name, "ip"])
   region       = var.project_region
-  ip_version   = var.ip_version
   network_tier = var.network_tier
 }
