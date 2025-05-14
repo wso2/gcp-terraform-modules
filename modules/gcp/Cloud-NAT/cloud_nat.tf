@@ -17,6 +17,7 @@ resource "google_compute_router_nat" "vpc_nat" {
   nat_ip_allocate_option              = var.nat_ip_allocate_option
   enable_endpoint_independent_mapping = var.enable_endpoint_independent_mapping
   source_subnetwork_ip_ranges_to_nat  = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+  tcp_time_wait_timeout_sec           = var.tcp_time_wait_timeout_sec
   max_ports_per_vm                    = var.max_ports_per_vm
   min_ports_per_vm                    = var.min_ports_per_vm
 

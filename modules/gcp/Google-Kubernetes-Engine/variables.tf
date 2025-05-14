@@ -143,3 +143,8 @@ variable "enabled_monitoring_components" {
   type        = list(string)
   default     = []
 }
+variable "logging_enabled_components" {
+  description = "List of logging components to enable"
+  type        = list(string)
+  default     = []
+}

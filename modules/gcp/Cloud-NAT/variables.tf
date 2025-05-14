@@ -33,15 +33,20 @@ variable "enable_endpoint_independent_mapping" {
 variable "max_ports_per_vm" {
   description = "The maximum number of ports per VM"
   type        = number
-  default     = 65535
+  default     = 65536
 }
 variable "min_ports_per_vm" {
   description = "The minimum number of ports per VM"
   type        = number
-  default     = 64
+  default     = 8192
 }
 variable "nat_ip_allocate_option" {
   description = "The NAT IP allocation option"
   type        = string
   default     = "AUTO_ONLY"
+}
+variable "tcp_time_wait_timeout_sec" {
+  description = "The TCP time wait timeout in seconds"
+  type        = number
+  default     = 120
 }
