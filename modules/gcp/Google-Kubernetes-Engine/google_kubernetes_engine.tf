@@ -100,10 +100,7 @@ resource "google_container_cluster" "cluster" {
   }
   resource_labels = var.labels
   logging_config {
-    enable_components = [
-      "SYSTEM_COMPONENTS",
-      "WORKLOADS"
-    ]
+    enable_components =  var.logging_enabled_components
   }
   monitoring_config{
     enable_components = var.enabled_monitoring_components
