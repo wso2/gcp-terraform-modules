@@ -13,3 +13,8 @@ output "id" {
   value      = google_compute_address.ip_address.id
   depends_on = [google_compute_address.ip_address]
 }
+
+output "ip" {
+  value      = google_compute_address.ip_address.address
+  depends_on = [google_compute_address.ip_address]
+}
