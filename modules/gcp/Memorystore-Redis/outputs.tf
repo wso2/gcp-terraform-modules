@@ -33,3 +33,16 @@ output "memorystore_redis_instance_port" {
     google_redis_instance.memorystore_redis_instance
   ]
 }
+output "memorystore_redis_instance_auth_string" {
+  value = google_redis_instance.memorystore_redis_instance.auth_string
+  depends_on = [
+    google_redis_instance.memorystore_redis_instance
+  ]
+}
+
+output "memorystore_redis_instance_ca_cert" {
+  value = google_redis_instance.memorystore_redis_instance.server_ca_certs[0].cert
+  depends_on = [
+    google_redis_instance.memorystore_redis_instance
+  ]
+}
