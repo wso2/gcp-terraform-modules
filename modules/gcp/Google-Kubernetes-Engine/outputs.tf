@@ -17,10 +17,6 @@ output "gke_service_account_email" {
   value      = google_service_account.cluster_service_account.email
   depends_on = [google_service_account.cluster_service_account]
 }
-output "gke_node_pool_id" {
-  value      = google_container_node_pool.node_pool.id
-  depends_on = [google_container_node_pool.node_pool]
-}
 output "gke_cluster_id" {
   value      = google_container_cluster.cluster.id
   depends_on = [google_container_cluster.cluster]
