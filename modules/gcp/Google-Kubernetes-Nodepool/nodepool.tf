@@ -23,9 +23,9 @@ resource "google_container_node_pool" "node_pool" {
     machine_type    = var.node_pool_machine_type
     service_account = var.cluster_service_account
     image_type      = "COS_CONTAINERD"
-    local_ssd_count = 0
-    disk_size_gb    = 50
-    disk_type       = "pd-balanced"
+    local_ssd_count = var.local_ssd_count
+    disk_size_gb    = var.disk_size_gb
+    disk_type       = var.disk_type
     metadata = {
       disable-legacy-endpoints = true
     }
@@ -62,8 +62,8 @@ resource "google_container_node_pool" "node_pool" {
     location_policy = var.node_location_policy
   }
   upgrade_settings {
-    max_surge       = 1
-    max_unavailable = 0
-    strategy        = "SURGE"
+    max_surge       = var.upgrade_max_surge
+    max_unavailable = var.upgrade_max_unavailable
+    strategy        = var.upgate_stratergy
   }
 }

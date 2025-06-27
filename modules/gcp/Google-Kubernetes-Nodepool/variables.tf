@@ -58,7 +58,10 @@ variable "labels" {
 variable "oauth_scopes" {
   description = "List of oauth scopes to assign"
   type        = list(string)
-  default     = []
+  default = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
 }
 variable "taint_settings" {
   description = "Map containing taint settings"
@@ -79,4 +82,39 @@ variable "cluster_id" {
 variable "cluster_service_account" {
   description = "The cluster id"
   type        = string
+}
+variable "disk_size_gb" {
+  description = "The disk size in GB"
+  type        = number
+  default     = 50
+}
+variable "local_ssd_count" {
+  description = "The number of local SSDs to attach to each node"
+  type        = number
+  default     = 0
+}
+variable "disk_type" {
+  description = "The disk type"
+  type        = string
+  default     = "pd-balanced"
+}
+variable "update_stratergy" {
+  description = "The update strategy for the node pool"
+  type        = string
+  default     = "SURGE"
+}
+variable "upgrade_max_surge" {
+  description = "The maximum number of nodes that can be created above the desired number of nodes during an upgrade"
+  type        = number
+  default     = 1
+}
+variable "upgrade_max_unavailable" {
+  description = "The maximum number of nodes that can be unavailable during an upgrade"
+  type        = number
+  default     = 0
+}
+variable "upgate_stratergy" {
+  description = "The upgrade strategy for the node pool"
+  type        = string
+  default     = "SURGE"
 }

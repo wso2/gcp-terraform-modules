@@ -45,40 +45,6 @@ variable "cluster_secondary_services_cidr_range" {
   description = "The cluster secondry services cidr range"
   type        = string
 }
-variable "node_pool_location" {
-  description = "The node pool location"
-  type        = string
-}
-variable "preemptible_nodes" {
-  description = "Whether the node pool is preemptible"
-  type        = bool
-  default     = false
-}
-variable "node_pool_zone_locations" {
-  description = "The node pool node zone locations"
-  type        = list(string)
-}
-variable "node_pool_node_count" {
-  description = "The node pool node count"
-  type        = number
-}
-variable "node_location_policy" {
-  description = "The node location policy"
-  type        = string
-  default     = "BALANCED"
-}
-variable "node_pool_machine_type" {
-  description = "The node pool machine type"
-  type        = string
-}
-variable "node_pool_min_node_count" {
-  description = "The node pool min node count"
-  type        = number
-}
-variable "node_pool_max_node_count" {
-  description = "The node pool max node count"
-  type        = number
-}
 variable "default_max_pods_per_node" {
   description = "The default max pods per node"
   type        = number
@@ -120,19 +86,6 @@ variable "roles" {
   type        = list(string)
   default     = []
 }
-variable "oauth_scopes" {
-  description = "List of oauth scopes to assign"
-  type        = list(string)
-  default     = []
-}
-variable "taint_settings" {
-  description = "Map containing taint settings"
-  type = map(object({
-    key    = string
-    value  = string
-    effect = string
-  }))
-}
 variable "managed_prometheus_enabled" {
   description = "Whether to enable managed Prometheus"
   type        = bool
@@ -148,3 +101,74 @@ variable "logging_enabled_components" {
   type        = list(string)
   default     = []
 }
+variable "enable_l4_ilb_subsetting" {
+  description = "Enable L4 ILB subsetting"
+  type        = bool
+  default     = false
+}
+variable "enable_tpu" {
+  description = "Enable TPU support"
+  type        = bool
+  default     = false
+}
+variable "enable_private_endpoint" {
+  description = "Enable private endpoint for the cluster"
+  type        = bool
+  default     = true
+}
+variable "default_snat_status_disabled" {
+  description = "Default SNAT status for the cluster"
+  type        = bool
+  default     = false
+}
+variable "release_channel" {
+  description = "Release channel for the GKE cluster"
+  type        = string
+  default     = "UNSPECIFIED"
+}
+variable "horizontal_pod_autoscaling" {
+  description = "Enable horizontal pod autoscaling"
+  type        = bool
+  default     = false
+}
+variable "http_load_balancing" {
+  description = "Enable HTTP load balancing"
+  type        = bool
+  default     = false
+}
+variable "gcp_filestore_csi_driver_config" {
+  description = "Enable GCP Filestore CSI driver"
+  type        = bool
+  default     = false
+}
+variable "gke_backup_agent_config" {
+  description = "Enable GKE backup agent"
+  type        = bool
+  default     = true
+}
+variable "gce_persistent_disk_csi_driver_config" {
+  description = "Enable GCE persistent disk CSI driver"
+  type        = bool
+  default     = true
+}
+variable "network_policy_config" {
+  description = "Enable network policy config"
+  type        = bool
+  default     = true
+}
+variable "dns_cache_config" {
+  description = "Enable DNS cache config"
+  type        = bool
+  default     = false
+}
+variable "vertical_pod_autoscaling" {
+  description = "Enable vertical pod autoscaling"
+  type        = bool
+  default     = true
+}
+variable "confidential_nodes" {
+  description = "Enable confidential nodes"
+  type        = bool
+  default     = false
+}
+
