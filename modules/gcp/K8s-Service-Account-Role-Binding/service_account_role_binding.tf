@@ -10,8 +10,8 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_service_account_iam_member" "k8s_bindings" {
-  for_each            = toset(var.service_account_roles)
-  service_account_id  = var.service_account_id
-  role                = each.key
-  member              = var.service_account_member
+  for_each           = toset(var.service_account_roles)
+  service_account_id = var.service_account_id
+  role               = each.key
+  member             = var.service_account_member
 }
