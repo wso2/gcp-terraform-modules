@@ -100,9 +100,9 @@ resource "google_container_cluster" "cluster" {
   }
   resource_labels = var.labels
   logging_config {
-    enable_components =  var.logging_enabled_components
+    enable_components = var.logging_enabled_components
   }
-  monitoring_config{
+  monitoring_config {
     enable_components = var.enabled_monitoring_components
     managed_prometheus {
       enabled = var.managed_prometheus_enabled

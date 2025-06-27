@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_secret_manager_secret_version" "secret_version" {
-  for_each = { for sv in var.secret_versions : sv.secret_name => sv }
-  secret   = var.existing_secret_ids[each.value.secret_name]
+  for_each    = { for sv in var.secret_versions : sv.secret_name => sv }
+  secret      = var.existing_secret_ids[each.value.secret_name]
   secret_data = each.value.secret_data
 }
