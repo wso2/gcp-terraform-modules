@@ -12,6 +12,6 @@
 resource "google_service_account_iam_member" "k8s_bindings" {
   for_each           = toset(var.service_account_roles)
   service_account_id = var.service_account_id
-  role               = each.key
-  member             = var.service_account_member
+  role               = each.value
+  member             = "serviceAccount:${var.project_id}.svc.id.goog[${var.kubernetes_namespace}/${var.kubernetes_service_account_name}]"
 }
