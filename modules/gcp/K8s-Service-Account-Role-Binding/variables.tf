@@ -12,6 +12,10 @@
 variable "service_account_roles" {
   type        = list(string)
   description = "The service account roles"
+  default = [
+    "roles/iam.workloadIdentityUser",
+    "roles/iam.serviceAccountTokenCreator"
+  ]
 }
 variable "service_account_id" {
   description = "The service account ID"
@@ -19,5 +23,17 @@ variable "service_account_id" {
 }
 variable "service_account_member" {
   description = "The service account member"
+  type        = string
+}
+variable "project_id" {
+  description = "The project ID"
+  type        = string
+}
+variable "kubernetes_namespace" {
+  description = "The Kubernetes namespace"
+  type        = string
+}
+variable "kubernetes_service_account_name" {
+  description = "The Kubernetes service account name"
   type        = string
 }
