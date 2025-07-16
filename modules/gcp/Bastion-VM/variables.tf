@@ -41,7 +41,7 @@ variable "bastion_vm_machine_type" {
 variable "boot_disk_image" {
   description = "The bastion vm boot disk image"
   type        = string
-  default     = "ubuntu-os-cloud/ubuntu-2004-lts"
+  default     = "ubuntu-os-cloud/ubuntu-2204-lts"
 }
 variable "enable_flow_logs" {
   description = "Enable flow logs of the VPC subnetwork"
