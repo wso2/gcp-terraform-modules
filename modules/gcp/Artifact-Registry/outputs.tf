@@ -29,3 +29,7 @@ output "artifact_registry_service_account_key" {
   value      = google_service_account_key.service_account_choreo_cp_key.private_key
   depends_on = [google_service_account_key.service_account_choreo_cp_key]
 }
+output "artifact_registry_url" {
+  value      = "${var.location}-docker.pkg.dev/${var.project_name}/${google_artifact_registry_repository.artifact_registry_repository.id}"
+  depends_on = [google_artifact_registry_repository.artifact_registry_repository]
+}
