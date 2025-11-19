@@ -34,6 +34,9 @@ resource "google_container_cluster" "cluster" {
   initial_node_count       = 1
   remove_default_node_pool = true
 
+  node_config {
+    service_account = google_service_account.cluster_service_account.email
+  }
   # network configuration
   network    = var.vpc_id
   subnetwork = google_compute_subnetwork.cluster_subnetwork.name
