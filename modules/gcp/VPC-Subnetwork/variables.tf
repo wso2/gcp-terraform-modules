@@ -9,47 +9,74 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "vpc_subnetwork_name" {
+variable "subnetwork_name" {
   description = "The name of the VPC subnetwork"
   type        = string
 }
-variable "environment" {
-  description = "The environment of the VPC subnetwork"
-  type        = string
-}
+
 variable "ip_cidr_range" {
   description = "The IP CIDR range of the VPC subnetwork"
   type        = string
 }
+
 variable "region" {
   description = "The region of the VPC subnetwork"
   type        = string
 }
+
 variable "vpc_id" {
   description = "The ID of the VPC network"
   type        = string
 }
+
 variable "project_id" {
   description = "The project ID of the VPC network"
   type        = string
 }
+
 variable "enable_flow_logs" {
   description = "Enable flow logs of the VPC subnetwork"
   type        = bool
   default     = false
 }
+
 variable "aggregation_interval" {
   description = "Aggregation interval of the VPC subnetwork logs"
   type        = string
   default     = "INTERVAL_10_MIN"
 }
+
 variable "flow_sampling" {
   description = "Flow sampling of the VPC subnetwork logs"
   type        = number
   default     = 0.5
 }
+
 variable "metadata" {
   description = "Metadata of the VPC subnetwork logs"
   type        = string
   default     = "INCLUDE_ALL_METADATA"
+}
+
+variable "subnetwork_abbreviation" {
+  description = "The abbreviation for subnetwork"
+  type        = string
+  default     = "snet"
+}
+
+variable "description" {
+  description = "An optional description of this resource"
+  type        = string
+}
+
+variable "purpose" {
+  description = "The purpose of the subnetwork"
+  type        = string
+  default     = "PRIVATE"
+}
+
+variable "role" {
+  description = "The role of the subnetwork"
+  type        = string
+  default     = "ACTIVE"
 }

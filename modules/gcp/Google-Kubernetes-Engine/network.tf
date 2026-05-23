@@ -13,16 +13,19 @@
 
 # trivy:ignore:AVD-GCP-0029
 resource "google_compute_subnetwork" "cluster_subnetwork" {
-  name                     = join("-", ["snet", "gke-cluster", var.environment])
-  project                  = var.project_name
-  ip_cidr_range            = var.cluster_subnetwork_primary_cidr
-  region                   = var.cluster_location
+  name                     = join("-", compact([var.subnetwork_abbreviation, var.subnetwork_name]))
   network                  = var.vpc_id
-  private_ip_google_access = true
+  ip_cidr_range            = var.cluster_subnetwork_primary_cidr
+  project                  = var.project_id
+  region                   = var.location
+  private_ip_google_access = var.private_ip_google_access
+  description              = "Subnetwork for GKE cluster in ${var.project_id} ${var.region}"
+
   secondary_ip_range {
     range_name    = "cluster-pods"
     ip_cidr_range = var.cluster_secondary_pods_cidr_range
   }
+
   secondary_ip_range {
     range_name    = "cluster-services"
     ip_cidr_range = var.cluster_secondary_services_cidr_range

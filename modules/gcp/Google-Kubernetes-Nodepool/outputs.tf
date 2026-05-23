@@ -13,3 +13,18 @@ output "gke_node_pool_id" {
   value      = google_container_node_pool.node_pool.id
   depends_on = [google_container_node_pool.node_pool]
 }
+
+output "gke_node_pool_name" {
+  value      = google_container_node_pool.node_pool.name
+  depends_on = [google_container_node_pool.node_pool]
+}
+
+output "gke_node_pool_instance_group_urls" {
+  value      = google_container_node_pool.node_pool.instance_group_urls
+  depends_on = [google_container_node_pool.node_pool]
+}
+
+output "gke_node_pool_managed_instance_group_urls" {
+  value      = google_container_node_pool.node_pool.managed_instance_group_urls
+  depends_on = [google_container_node_pool.node_pool]
+}

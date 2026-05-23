@@ -9,15 +9,23 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "project_name" {
-  description = "The name of the project"
+variable "project_id" {
+  description = "The ID of the project in which the service account will be created"
   type        = string
 }
+
 variable "service_account_name" {
+  description = "The name of the service account"
   type        = string
-  description = "The service account name"
 }
-variable "environment" {
-  description = "The environment of the project"
+
+variable "description" {
+  description = "The description of the service account"
   type        = string
+}
+
+variable "service_account_abbreviation" {
+  description = "The abbreviation of the service account name"
+  type        = string
+  default     = "svcacc"
 }

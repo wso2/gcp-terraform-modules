@@ -13,15 +13,23 @@ output "vpc_id" {
   value      = google_compute_network.vpc_network.id
   depends_on = [google_compute_network.vpc_network]
 }
+
 output "vpc_name" {
   value      = google_compute_network.vpc_network.name
   depends_on = [google_compute_network.vpc_network]
 }
+
 output "vpc_network_gateway_ipv4" {
   value      = google_compute_network.vpc_network.gateway_ipv4
   depends_on = [google_compute_network.vpc_network]
 }
+
 output "vpc_self_link" {
   value      = google_compute_network.vpc_network.self_link
+  depends_on = [google_compute_network.vpc_network]
+}
+
+output "vpc_network_id" {
+  value      = google_compute_network.vpc_network.network_id
   depends_on = [google_compute_network.vpc_network]
 }

@@ -13,26 +13,47 @@ output "gke_service_account_id" {
   value      = google_service_account.cluster_service_account.id
   depends_on = [google_service_account.cluster_service_account]
 }
+
 output "gke_service_account_email" {
   value      = google_service_account.cluster_service_account.email
   depends_on = [google_service_account.cluster_service_account]
 }
+
+output "gke_service_account_name" {
+  value      = google_service_account.cluster_service_account.name
+  depends_on = [google_service_account.cluster_service_account]
+}
+
+output "gke_service_account_unique_id" {
+  value      = google_service_account.cluster_service_account.unique_id
+  depends_on = [google_service_account.cluster_service_account]
+}
+
+output "gke_service_account_member" {
+  value      = google_service_account.cluster_service_account.member
+  depends_on = [google_service_account.cluster_service_account]
+}
+
 output "gke_cluster_id" {
   value      = google_container_cluster.cluster.id
   depends_on = [google_container_cluster.cluster]
 }
+
 output "gke_cluster_name" {
   value      = google_container_cluster.cluster.name
   depends_on = [google_container_cluster.cluster]
 }
+
 output "gke_cluster_subnet_id" {
   value      = google_compute_subnetwork.cluster_subnetwork.id
   depends_on = [google_compute_subnetwork.cluster_subnetwork]
 }
+
 output "gke_cluster_subnet_name" {
   value      = google_compute_subnetwork.cluster_subnetwork.name
   depends_on = [google_compute_subnetwork.cluster_subnetwork]
 }
+
 output "gke_cluster_subnet_ip_cidr_range" {
   value      = google_compute_subnetwork.cluster_subnetwork.ip_cidr_range
   depends_on = [google_compute_subnetwork.cluster_subnetwork]

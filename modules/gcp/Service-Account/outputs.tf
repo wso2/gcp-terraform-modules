@@ -13,11 +13,23 @@ output "service_account_id" {
   value      = google_service_account.service_account.id
   depends_on = [google_service_account.service_account]
 }
+
 output "service_account_email" {
   value      = google_service_account.service_account.email
   depends_on = [google_service_account.service_account]
 }
+
 output "service_account_name" {
   value      = google_service_account.service_account.name
+  depends_on = [google_service_account.service_account]
+}
+
+output "service_account_unique_id" {
+  value      = google_service_account.service_account.unique_id
+  depends_on = [google_service_account.service_account]
+}
+
+output "service_account_member" {
+  value      = google_service_account.service_account.member
   depends_on = [google_service_account.service_account]
 }

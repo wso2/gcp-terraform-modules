@@ -9,7 +9,22 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "nat_router_id" {
-  value      = google_compute_router.nat_router.id
-  depends_on = [google_compute_router.nat_router]
+output "router_id" {
+  value      = google_compute_router.router.id
+  depends_on = [google_compute_router.router]
+}
+
+output "router_self_link" {
+  value      = google_compute_router.router.self_link
+  depends_on = [google_compute_router.router]
+}
+
+output "router_nat_id" {
+  value      = google_compute_router_nat.router_nat.id
+  depends_on = [google_compute_router_nat.router_nat]
+}
+
+output "router_nat_self_link" {
+  value      = google_compute_router_nat.router_nat.self_link
+  depends_on = [google_compute_router_nat.router_nat]
 }

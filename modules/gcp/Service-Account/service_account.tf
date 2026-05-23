@@ -10,8 +10,8 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_service_account" "service_account" {
-  project      = var.project_name
-  account_id   = join("-", ["svcacc", var.service_account_name, var.environment])
-  display_name = join("-", ["svcacc", var.service_account_name, var.environment])
-  description  = join("", ["Service account named ", var.service_account_name, " for ", var.project_name])
+  project      = var.project_id
+  account_id   = join("-", compact([var.service_account_abbreviation, var.service_account_name]))
+  display_name = join("-", compact([var.service_account_abbreviation, var.service_account_name]))
+  description  = var.description
 }

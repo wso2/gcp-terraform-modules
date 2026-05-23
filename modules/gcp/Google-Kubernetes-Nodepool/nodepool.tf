@@ -10,13 +10,13 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_container_node_pool" "node_pool" {
-  name           = var.node_pool_name
-  project        = var.project_name
+  name           = join("-", compact([var.node_pool_abbreviation, var.node_pool_name]))
+  project        = var.project_id
   location       = var.node_pool_location
   cluster        = var.cluster_id
   node_count     = var.node_pool_node_count
   node_locations = var.node_pool_zone_locations
-  version        = var.master_kubernetes_version
+  version        = var.kubernetes_version
 
   node_config {
     preemptible     = var.preemptible_nodes
@@ -26,13 +26,18 @@ resource "google_container_node_pool" "node_pool" {
     local_ssd_count = var.local_ssd_count
     disk_size_gb    = var.disk_size_gb
     disk_type       = var.disk_type
+    oauth_scopes    = var.oauth_scopes
+    labels          = var.labels
+    tags            = var.tags
+
     metadata = {
       disable-legacy-endpoints = true
     }
+
     workload_metadata_config {
-      mode = "GKE_METADATA"
+      mode = var.workload_metadata_mode
     }
-    oauth_scopes = var.oauth_scopes
+
     dynamic "taint" {
       for_each = var.taint_settings
       content {
@@ -41,29 +46,37 @@ resource "google_container_node_pool" "node_pool" {
         effect = taint.value.effect
       }
     }
+
     shielded_instance_config {
-      enable_integrity_monitoring = true
-      enable_secure_boot          = false
+      enable_integrity_monitoring = var.enable_integrity_monitoring
+      enable_secure_boot          = var.enable_secure_boot
     }
-    labels = var.labels
   }
+
   management {
-    auto_repair  = true
-    auto_upgrade = false
+    auto_repair  = var.auto_repair
+    auto_upgrade = var.auto_upgrade
   }
+
   network_config {
     enable_private_nodes = true
     create_pod_range     = false
     pod_range            = "cluster-pods"
   }
+
   autoscaling {
     max_node_count  = var.node_pool_max_node_count
     min_node_count  = var.node_pool_min_node_count
     location_policy = var.node_location_policy
   }
+
   upgrade_settings {
     max_surge       = var.upgrade_max_surge
     max_unavailable = var.upgrade_max_unavailable
-    strategy        = var.upgate_stratergy
+    strategy        = var.upgrade_strategy
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
