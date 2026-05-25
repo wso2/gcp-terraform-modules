@@ -9,21 +9,14 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "log_metric_filter" {
-  value = google_logging_metric.logging_metric.filter
-  depends_on = [
-    google_logging_metric.logging_metric
-  ]
-}
 output "log_metric_id" {
-  value = google_logging_metric.logging_metric.id
-  depends_on = [
-    google_logging_metric.logging_metric
-  ]
+  description = "The identifier of the log metric (matches the name)"
+  value       = google_logging_metric.logging_metric.id
+  depends_on  = [google_logging_metric.logging_metric]
 }
+
 output "log_metric_name" {
-  value = google_logging_metric.logging_metric.name
-  depends_on = [
-    google_logging_metric.logging_metric
-  ]
+  description = "The client-assigned name of the log metric"
+  value       = google_logging_metric.logging_metric.name
+  depends_on  = [google_logging_metric.logging_metric]
 }
