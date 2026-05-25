@@ -158,7 +158,7 @@ variable "conditions" {
       }))
 
       hourly = optional(object({
-        periodicity   = number          # 1–48
+        periodicity   = number           # 1–48
         minute_offset = optional(number) # 0–59
       }))
 
