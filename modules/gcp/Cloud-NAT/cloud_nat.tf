@@ -35,7 +35,7 @@ resource "google_compute_router_nat" "router_nat" {
   min_ports_per_vm                    = var.min_ports_per_vm
 
   dynamic "subnetwork" {
-    for_each = var.source_subnetwork_ip_ranges_to_nat == "LIST_OF_SUBNETWORKS" ? coalesce(var.subnetworks, []) : [] 
+    for_each = var.source_subnetwork_ip_ranges_to_nat == "LIST_OF_SUBNETWORKS" ? coalesce(var.subnetworks, []) : []
     content {
       name                    = each.value.name
       source_ip_ranges_to_nat = each.value.source_ip_ranges_to_nat
