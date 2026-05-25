@@ -95,11 +95,11 @@ variable "user_labels" {
 
 variable "sensitive_labels" {
   description = "Sensitive configuration fields for the notification channel"
-  type = optional(object({
+  type = object({
     auth_token  = optional(string)
     password    = optional(string)
     service_key = optional(string)
-  }))
+  })
   default   = null
   sensitive = true
 }

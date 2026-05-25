@@ -187,7 +187,7 @@ variable "conditions" {
 
 variable "documentation" {
   description = "Documentation content to include in the alert policy"
-  type = optional(object({
+  type = object({
     content   = optional(string)
     mime_type = optional(string, "text/markdown")
     subject   = optional(string)
@@ -196,13 +196,13 @@ variable "documentation" {
       display_name = optional(string)
       url          = optional(string)
     })), [])
-  }))
+  })
   default = null
 }
 
 variable "alert_strategy" {
   description = "Strategy for alerting when incidents are opened or closed. If not specified, a default strategy with no auto-close and no notification rate limit will be used."
-  type = optional(object({
+  type = object({
     auto_close           = optional(string)
     notification_prompts = optional(list(string), [])
 
@@ -214,6 +214,6 @@ variable "alert_strategy" {
       notification_channel_names = optional(list(string), [])
       renotify_interval          = optional(string)
     })), [])
-  }))
+  })
   default = null
 }

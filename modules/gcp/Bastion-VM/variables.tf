@@ -204,7 +204,6 @@ variable "priority" {
 variable "ssh_allow_source_ranges" {
   description = "The source ranges allowed to SSH to the bastion VM"
   type        = list(string)
-  default     = []
 }
 
 variable "service_account_description" {

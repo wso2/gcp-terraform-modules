@@ -56,7 +56,7 @@ variable "network_modes" {
   default     = ["MODE_IPV4"]
 }
 
-variable "connet_mode" {
+variable "connect_mode" {
   description = "Connect mode for the filestore instance (e.g., DIRECT_PEERING, PRIVATE_SERVICE_ACCESS)"
   type        = string
   default     = "DIRECT_PEERING"

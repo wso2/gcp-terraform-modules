@@ -29,7 +29,7 @@ resource "google_logging_metric" "logging_metric" {
       display_name = metric_descriptor.value.display_name
 
       dynamic "labels" {
-        for_each = metric_descriptor.value.labels
+        for_each = metric_descriptor.value.labels != null ? metric_descriptor.value.labels : []
         content {
           key         = labels.value.key
           value_type  = labels.value.value_type

@@ -21,7 +21,7 @@ variable "metric_name" {
 }
 
 variable "project_id" {
-  description = "The ID of the project in which the metric will be created. Defaults to the provider project if not set"
+  description = "The ID of the project in which the metric will be created"
   type        = string
 }
 

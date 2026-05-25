@@ -22,6 +22,6 @@ resource "google_filestore_instance" "persistent_storage" {
   networks {
     network      = var.vpc_name
     modes        = var.network_modes
-    connect_mode = var.connet_mode
+    connect_mode = var.connect_mode
   }
 }
