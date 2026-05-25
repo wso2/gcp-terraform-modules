@@ -10,8 +10,8 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_service_account" "bastion_service_account" {
-  project      = var.project_name
-  account_id   = join("-", ["svcacc", "bastion", var.environment])
-  display_name = join("-", ["svcacc", "bastion", var.environment])
-  description  = join("", ["Bastion service account for ", var.project_name])
+  project      = var.project_id
+  account_id   = join("-", compact([var.service_account_abbreviation, var.service_account_name]))
+  display_name = join("-", compact([var.service_account_abbreviation, var.service_account_name]))
+  description  = var.service_account_description
 }

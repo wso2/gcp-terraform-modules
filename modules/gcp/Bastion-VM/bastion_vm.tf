@@ -15,34 +15,54 @@
 # Ignore: AVD-GCP-0067(https://avd.aquasec.com/misconfig/avd-gcp-0067)
 # Reason: Shielded VM can be enabled if all the installations are required to be signed.
 
+resource "google_compute_disk" "bastion_vm_data_disk" {
+  name        = join("-", compact([var.data_disk_abbreviation, var.data_disk_name]))
+  project     = var.project_id
+  description = var.data_disk_description
+  type        = var.data_disk_type
+  zone        = var.data_disk_zone
+  size        = var.data_disk_size_gb
+  labels      = var.data_disk_labels
+}
+
 # trivy:ignore:AVD-GCP-0030
 # trivy:ignore:AVD-GCP-0033
 # trivy:ignore:AVD-GCP-0067
 resource "google_compute_instance" "bastion_vm" {
-  name         = join("-", ["vmbastion", var.location, var.environment])
-  project      = var.project_name
-  description  = join(" ", ["Bastion VM for", var.environment])
+  name         = join("-", compact([var.bastion_vm_abbreviation, var.name]))
+  project      = var.project_id
+  description  = var.description
   machine_type = var.bastion_vm_machine_type
   zone         = var.zone
+  labels       = var.bastion_vm_labels
+  tags         = var.bastion_vm_tags
 
   boot_disk {
     initialize_params {
-      image = var.boot_disk_image
-      labels = {
-        boot_disk = "ubuntu-2204-lts"
-      }
+      image  = var.boot_disk_image
+      size   = var.boot_disk_size_gb
+      type   = var.boot_disk_type
+      labels = var.boot_disk_labels
     }
   }
+
   network_interface {
     network            = var.vpc_name
-    subnetwork_project = var.project_name
-    subnetwork         = google_compute_subnetwork.bastion_subnetwork.name
+    subnetwork         = google_compute_subnetwork.bastion_subnetwork.self_link
+    subnetwork_project = var.project_id
+    network_ip         = var.bastion_vm_network_ip
   }
+
   shielded_instance_config {
-    enable_vtpm        = true
-    enable_secure_boot = var.enable_secure_boot
+    enable_vtpm                 = var.enable_vtpm
+    enable_secure_boot          = var.enable_secure_boot
+    enable_integrity_monitoring = var.enable_integrity_monitoring
   }
-  metadata = {}
+
+  metadata = {
+    enable-oslogin         = var.enable_oslogin ? "TRUE" : "FALSE"
+    block-project-ssh-keys = var.block_project_ssh_keys ? "TRUE" : "FALSE"
+  }
 
   metadata_startup_script = var.metadata_startup_script
 
@@ -50,8 +70,10 @@ resource "google_compute_instance" "bastion_vm" {
     email  = google_service_account.bastion_service_account.email
     scopes = ["cloud-platform"]
   }
-  depends_on = [
-    google_service_account.bastion_service_account,
-    google_compute_subnetwork.bastion_subnetwork
-  ]
+
+  attached_disk {
+    source      = google_compute_disk.bastion_vm_data_disk.self_link
+    device_name = google_compute_disk.bastion_vm_data_disk.name
+    mode        = "READ_WRITE"
+  }
 }

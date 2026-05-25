@@ -44,6 +44,7 @@ variable "address_type" {
 variable "description" {
   description = "An optional description of this resource"
   type        = string
+  default     = null
 }
 
 variable "region" {
@@ -59,6 +60,7 @@ variable "project_id" {
 variable "subnetwork" {
   description = "The URL of the subnetwork in which to reserve the address (optional)"
   type        = string
+  default     = null
 }
 
 variable "labels" {

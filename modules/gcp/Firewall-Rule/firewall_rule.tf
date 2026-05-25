@@ -10,13 +10,14 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_compute_firewall" "rule" {
-  project            = var.project_name
-  name               = join("-", ["fwr", var.rule_name, var.environment])
+  project            = var.project_id
+  name               = join("-", compact([var.firewall_abbreviation, var.rule_name]))
   network            = var.vpc_id
   priority           = var.priority
   direction          = var.direction
   source_ranges      = var.source_ranges
   destination_ranges = var.destination_ranges
+  disabled           = var.disabled
 
   dynamic "allow" {
     for_each = var.allow_rules
@@ -25,6 +26,7 @@ resource "google_compute_firewall" "rule" {
       ports    = allow.value.ports
     }
   }
+
   dynamic "deny" {
     for_each = var.deny_rules
     content {

@@ -13,7 +13,13 @@ output "firewall_rule_id" {
   value      = google_compute_firewall.rule.id
   depends_on = [google_compute_firewall.rule]
 }
+
 output "firewall_rule_name" {
   value      = google_compute_firewall.rule.name
+  depends_on = [google_compute_firewall.rule]
+}
+
+output "firewall_rule_self_link" {
+  value      = google_compute_firewall.rule.self_link
   depends_on = [google_compute_firewall.rule]
 }

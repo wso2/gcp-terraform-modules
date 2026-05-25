@@ -44,6 +44,7 @@ variable "address_type" {
 variable "description" {
   description = "An optional description of this resource"
   type        = string
+  default     = null
 }
 
 variable "project_id" {
@@ -54,10 +55,23 @@ variable "project_id" {
 variable "network" {
   description = "The URL of the network in which to reserve the address (optional)"
   type        = string
+  default     = null
+}
+
+variable "purpose" {
+  description = "The purpose of the address (optional)"
+  type        = string
+  default     = null
 }
 
 variable "labels" {
   description = "A set of key/value label pairs to assign to the resource"
   type        = map(string)
   default     = {}
+}
+
+variable "prefix_length" {
+  description = "The prefix length if the address is a part of a reserved range (optional)"
+  type        = number
+  default     = null
 }

@@ -18,14 +18,12 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_compute_global_address" "ip_address" {
-  name          = join("-", compact([var.compute_address_abbreviation, var.compute_address_name]))
-  address       = var.address
-  address_type  = var.address_type
-  prefix_length = var.prefix_length
-  description   = var.description
-  project       = var.project_id
-  network       = var.network
-  purpose       = var.purpose
-  labels        = var.labels
+terraform {
+  required_version = ">= 0.13"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 6.0.0"
+    }
+  }
 }

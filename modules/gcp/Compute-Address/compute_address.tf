@@ -19,7 +19,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_compute_address" "ip_address" {
-  name         = join("-", [var.compute_address_abbreviation, var.compute_address_name])
+  name         = join("-", compact([var.compute_address_abbreviation, var.compute_address_name]))
   address      = var.address
   address_type = var.address_type
   description  = var.description

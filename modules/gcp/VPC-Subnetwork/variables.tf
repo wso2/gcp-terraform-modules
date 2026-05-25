@@ -67,6 +67,7 @@ variable "subnetwork_abbreviation" {
 variable "description" {
   description = "An optional description of this resource"
   type        = string
+  default     = null
 }
 
 variable "purpose" {

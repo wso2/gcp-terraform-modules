@@ -9,13 +9,8 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "project_name" {
-  description = "GCP project name"
-  type        = string
-}
-
-variable "environment" {
-  description = "Deployment environment. This will be used for resource naming."
+variable "project_id" {
+  description = "ID of the GCP project where the filestore instance will be created."
   type        = string
 }
 
@@ -25,12 +20,12 @@ variable "vpc_name" {
 }
 
 variable "filestore_tier" {
-  description = "Filestore tier"
+  description = "Filestore tier (e.g., STANDARD, PREMIUM, BASIC_HDD, BASIC_SSD)"
   type        = string
 }
 
-variable "filestore_capacity_gb" {
-  description = "Filestore capacity in GB"
+variable "share_capacity_gb" {
+  description = "Filestore share capacity in GB"
   type        = number
 }
 
@@ -40,6 +35,35 @@ variable "filestore_location" {
 }
 
 variable "filestore_name" {
-  description = "File share name"
+  description = "Name of the filestore instance"
   type        = string
+}
+
+variable "filestore_abbreviation" {
+  description = "Abbreviation for the filestore"
+  type        = string
+  default     = "filestore"
+}
+
+variable "share_name" {
+  description = "Name of the filestore share"
+  type        = string
+}
+
+variable "network_modes" {
+  description = "Network modes for the filestore instance (e.g., MODE_IPV4, MODE_IPV6)"
+  type        = list(string)
+  default     = ["MODE_IPV4"]
+}
+
+variable "connet_mode" {
+  description = "Connect mode for the filestore instance (e.g., DIRECT_PEERING, PRIVATE_SERVICE_ACCESS)"
+  type        = string
+  default     = "DIRECT_PEERING"
+}
+
+variable "labels" {
+  description = "Labels to apply to the filestore instance"
+  type        = map(string)
+  default     = {}
 }

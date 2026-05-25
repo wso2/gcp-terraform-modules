@@ -19,7 +19,7 @@ resource "google_compute_subnetwork" "cluster_subnetwork" {
   project                  = var.project_id
   region                   = var.location
   private_ip_google_access = var.private_ip_google_access
-  description              = "Subnetwork for GKE cluster in ${var.project_id} ${var.region}"
+  description              = "Subnetwork for GKE cluster in ${var.project_id} ${var.location}"
 
   secondary_ip_range {
     range_name    = "cluster-pods"
