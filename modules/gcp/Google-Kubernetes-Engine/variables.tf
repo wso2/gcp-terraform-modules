@@ -324,3 +324,8 @@ variable "cluster_description" {
   description = "Description of the cluster"
   type        = string
 }
+
+variable "cluster_name" {
+  description = "Name of the GKE cluster"
+  type        = string
+}

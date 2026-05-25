@@ -14,7 +14,7 @@ variable "project_id" {
   type        = string
 }
 
-variable "firewall_name" {
+variable "rule_name" {
   description = "The name of the firewall rule"
   type        = string
 }

@@ -264,3 +264,8 @@ variable "data_disk_labels" {
   type        = map(string)
   default     = {}
 }
+
+variable "name" {
+  description = "The name of the bastion VM instance"
+  type        = string
+}
