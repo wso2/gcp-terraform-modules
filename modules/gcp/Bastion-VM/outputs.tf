@@ -13,10 +13,12 @@ output "bastion_resource_id" {
   value      = google_compute_instance.bastion_vm.id
   depends_on = [google_compute_instance.bastion_vm]
 }
+
 output "bastion_instance_id" {
   value      = google_compute_instance.bastion_vm.name
   depends_on = [google_compute_instance.bastion_vm]
 }
+
 output "bastion_service_account_email" {
   value      = google_service_account.bastion_service_account.email
   depends_on = [google_service_account.bastion_service_account]

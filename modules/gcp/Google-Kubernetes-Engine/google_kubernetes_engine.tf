@@ -18,102 +18,148 @@
 # trivy:ignore:AVD-GCP-0051
 # trivy:ignore:AVD-GCP-0056
 resource "google_container_cluster" "cluster" {
-  name               = join("-", ["gke", var.project_name, var.project_region_short_name, var.environment])
-  project            = var.project_name
-  description        = join("", ["GKE cluster for ", var.project_name, " located in ", var.cluster_location, " ENV: ", var.environment])
+  name               = join("-", compact([var.container_cluster_abbreviation, var.cluster_name]))
+  project            = var.project_id
+  description        = var.cluster_description
   min_master_version = var.master_kubernetes_version
+  datapath_provider  = var.datapath_provider
+  resource_labels    = var.labels
 
   # Regional cluster
-  location                  = var.cluster_location
-  enable_kubernetes_alpha   = false
+  location                  = var.location
+  enable_kubernetes_alpha   = var.enable_kubernetes_alpha
   enable_l4_ilb_subsetting  = var.enable_l4_ilb_subsetting
   enable_tpu                = var.enable_tpu
   default_max_pods_per_node = var.default_max_pods_per_node
+  deletion_protection       = var.deletion_protection
 
   # Setting the value to 1 as it will be the minimum number to remove the default node pool
   initial_node_count       = 1
   remove_default_node_pool = true
 
+  # network configuration
+  network         = var.vpc_id
+  subnetwork      = google_compute_subnetwork.cluster_subnetwork.name
+  networking_mode = var.networking_mode
+
   node_config {
     service_account = google_service_account.cluster_service_account.email
   }
-  # network configuration
-  network    = var.vpc_id
-  subnetwork = google_compute_subnetwork.cluster_subnetwork.name
+
   private_cluster_config {
-    enable_private_endpoint = var.enable_private_endpoint
     enable_private_nodes    = true
+    enable_private_endpoint = var.enable_private_endpoint
     master_ipv4_cidr_block  = var.master_cluster_ipv4_cidr
+
+    master_global_access_config {
+      enabled = var.master_global_access_config_enabled
+    }
   }
+
   ip_allocation_policy {
     cluster_secondary_range_name  = "cluster-pods"
     services_secondary_range_name = "cluster-services"
   }
+
   default_snat_status {
     disabled = var.default_snat_status_disabled
   }
+
   master_authorized_networks_config {
     cidr_blocks {
       cidr_block   = var.master_authorized_networks_cidr
       display_name = "Authorized network to access CP"
     }
   }
+
   master_auth {
     client_certificate_config {
       issue_client_certificate = false
     }
   }
+
   workload_identity_config {
-    workload_pool = join(".", [var.project_name, "svc.id.goog"])
+    workload_pool = "${var.project_id}.svc.id.goog"
   }
+
   release_channel {
     channel = var.release_channel
   }
+
   cluster_autoscaling {
-    enabled = false
+    enabled = var.cluster_autoscaling_enabled
+    auto_provisioning_defaults {
+      management {
+        auto_upgrade = var.auto_provisioning_management_auto_upgrade
+        auto_repair  = var.auto_provisioning_management_auto_repair
+      }
+    }
   }
+
+  security_posture_config {
+    mode               = var.security_posture_mode
+    vulnerability_mode = var.security_posture_vulnerability_mode
+  }
+
+  binary_authorization {
+    evaluation_mode = var.binary_authorization_evaluation_mode
+  }
+
+  database_encryption {
+    state    = var.database_encryption_state
+    key_name = var.database_encryption_key_name
+  }
+
+  secret_manager_config {
+    enabled = var.secret_manager_config_enabled
+  }
+
   addons_config {
     horizontal_pod_autoscaling {
       disabled = var.horizontal_pod_autoscaling
     }
+
     http_load_balancing {
       disabled = var.http_load_balancing
     }
+
     gcp_filestore_csi_driver_config {
       enabled = var.gcp_filestore_csi_driver_config
     }
+
     gke_backup_agent_config {
       enabled = var.gke_backup_agent_config
     }
+
     gce_persistent_disk_csi_driver_config {
       enabled = var.gce_persistent_disk_csi_driver_config
     }
+
     network_policy_config {
       disabled = var.network_policy_config
     }
+
     dns_cache_config {
       enabled = var.dns_cache_config
     }
   }
+
   vertical_pod_autoscaling {
     enabled = var.vertical_pod_autoscaling
   }
+
   confidential_nodes {
     enabled = var.confidential_nodes
   }
-  resource_labels = var.labels
+
   logging_config {
     enable_components = var.logging_enabled_components
   }
+
   monitoring_config {
     enable_components = var.enabled_monitoring_components
     managed_prometheus {
       enabled = var.managed_prometheus_enabled
     }
   }
-
-  depends_on = [
-    google_compute_subnetwork.cluster_subnetwork,
-    google_service_account.cluster_service_account
-  ]
 }

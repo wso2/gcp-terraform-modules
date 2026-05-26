@@ -13,11 +13,37 @@ variable "peering_name" {
   description = "The network peering name"
   type        = string
 }
+
 variable "main_network" {
   description = "The main network to be peered"
   type        = string
 }
+
 variable "peer_network" {
   description = "The peering network"
   type        = string
+}
+
+variable "export_custom_routes" {
+  description = "Whether to export custom routes to peer network"
+  type        = bool
+  default     = false
+}
+
+variable "import_custom_routes" {
+  description = "Whether to import custom routes from peer network"
+  type        = bool
+  default     = false
+}
+
+variable "export_subnet_routes_with_public_ip" {
+  description = "Whether to export subnet routes with public IP to peer network"
+  type        = bool
+  default     = true
+}
+
+variable "peering_abbreviation" {
+  description = "Abbreviation to be used in the peering name"
+  type        = string
+  default     = "peer"
 }

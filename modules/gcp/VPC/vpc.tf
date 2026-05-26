@@ -10,9 +10,10 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_compute_network" "vpc_network" {
-  name                    = join("-", ["vpc", var.vpc_name])
-  project                 = var.project_name
-  description             = join(" ", ["VPC for", var.vpc_name])
-  auto_create_subnetworks = false
-  mtu                     = 1460
+  name                    = join("-", compact([var.vpc_abbreviation, var.vpc_name]))
+  project                 = var.project_id
+  description             = var.description
+  auto_create_subnetworks = var.auto_create_subnetworks
+  mtu                     = var.mtu
+  routing_mode            = var.routing_mode
 }

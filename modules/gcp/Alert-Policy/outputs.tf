@@ -9,6 +9,14 @@
 #
 # --------------------------------------------------------------------------------------
 
+output "policy_id" {
+  description = "The identifier of the alert policy (matches the name field)"
+  value       = google_monitoring_alert_policy.alert_policy.id
+  depends_on  = [google_monitoring_alert_policy.alert_policy]
+}
+
 output "policy_name" {
-  value = google_monitoring_alert_policy.alert_policy.name
+  description = "The unique resource name of the alert policy in the format projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]"
+  value       = google_monitoring_alert_policy.alert_policy.name
+  depends_on  = [google_monitoring_alert_policy.alert_policy]
 }

@@ -9,7 +9,17 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "vpc_sub_id" {
+output "id" {
   value      = google_compute_subnetwork.vpc_subnetwork.id
+  depends_on = [google_compute_subnetwork.vpc_subnetwork]
+}
+
+output "subnetwork_id" {
+  value      = google_compute_subnetwork.vpc_subnetwork.subnetwork_id
+  depends_on = [google_compute_subnetwork.vpc_subnetwork]
+}
+
+output "self_link" {
+  value      = google_compute_subnetwork.vpc_subnetwork.self_link
   depends_on = [google_compute_subnetwork.vpc_subnetwork]
 }

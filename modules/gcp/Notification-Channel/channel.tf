@@ -10,9 +10,22 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_monitoring_notification_channel" "channel" {
-  project      = var.project_name
-  display_name = join("-", [var.environment, var.chanel_type, var.project_name, var.channel_name])
-  description  = join("", ["Email notification channel for ", var.channel_name, " in ", var.environment])
-  type         = var.chanel_type
-  labels       = var.notification_label
+  project         = var.project_id
+  display_name    = join("-", compact([var.channel_abbreviation, var.channel_name]))
+  description     = var.description
+  type            = var.channel_type
+  labels          = var.labels
+  user_labels     = var.user_labels
+  enabled         = var.enabled
+  force_delete    = var.force_delete
+  deletion_policy = var.deletion_policy
+
+  dynamic "sensitive_labels" {
+    for_each = var.sensitive_labels != null ? [var.sensitive_labels] : []
+    content {
+      auth_token  = sensitive_labels.value.auth_token
+      password    = sensitive_labels.value.password
+      service_key = sensitive_labels.value.service_key
+    }
+  }
 }

@@ -10,15 +10,15 @@
 # --------------------------------------------------------------------------------------
 
 resource "google_service_account" "cluster_service_account" {
-  project      = var.project_name
-  account_id   = join("-", ["svcacc", "gke", var.environment])
-  display_name = join("-", ["svcacc", "gke", var.environment])
-  description  = join("", ["GKE service account for ", var.project_name, " in ", var.environment, " environment ", "located in ", var.cluster_location])
+  project      = var.project_id
+  account_id   = join("-", compact([var.service_account_abbreviation, var.service_account_name]))
+  display_name = join("-", compact([var.service_account_abbreviation, var.service_account_name]))
+  description  = var.service_account_description
 }
 
 resource "google_project_iam_member" "role_bindings" {
   count   = length(var.roles)
-  project = var.project_name
+  project = var.project_id
   role    = var.roles[count.index]
-  member  = "serviceAccount:${google_service_account.cluster_service_account.email}"
+  member  = google_service_account.cluster_service_account.member
 }

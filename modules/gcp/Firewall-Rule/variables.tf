@@ -9,22 +9,21 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "project_name" {
-  description = "The project name of the firewall rule"
+variable "project_id" {
+  description = "The project ID where the firewall rule will be created"
   type        = string
 }
+
 variable "rule_name" {
-  description = "The firewall rule name"
+  description = "The name of the firewall rule"
   type        = string
 }
-variable "environment" {
-  description = "The environment of the firewall rule"
-  type        = string
-}
+
 variable "vpc_id" {
-  description = "The VPN ID of the firewall rule"
+  description = "The ID of the VPC where the firewall rule will be created"
   type        = string
 }
+
 variable "allow_rules" {
   description = "The allow rules"
   type = list(object({
@@ -33,6 +32,7 @@ variable "allow_rules" {
   }))
   default = []
 }
+
 variable "deny_rules" {
   description = "The deny rules"
   type = list(object({
@@ -41,20 +41,38 @@ variable "deny_rules" {
   }))
   default = []
 }
+
 variable "priority" {
   description = "The priority of the rule"
   type        = number
 }
+
 variable "direction" {
   description = "The direction of the rule"
   type        = string
   default     = "INGRESS"
 }
+
 variable "source_ranges" {
   description = "The source ranges"
   type        = list(string)
+  default     = []
 }
+
 variable "destination_ranges" {
   description = "The destination ranges"
   type        = list(string)
+  default     = []
+}
+
+variable "firewall_abbreviation" {
+  description = "The abbreviation to be used in the firewall rule name"
+  type        = string
+  default     = "fwr"
+}
+
+variable "disabled" {
+  description = "Whether the firewall rule is disabled"
+  type        = bool
+  default     = false
 }

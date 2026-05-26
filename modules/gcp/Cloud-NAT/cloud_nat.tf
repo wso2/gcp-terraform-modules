@@ -9,34 +9,41 @@
 #
 # --------------------------------------------------------------------------------------
 
-resource "google_compute_router_nat" "vpc_nat" {
-  name                                = join("-", ["nat", var.environment])
-  project                             = var.project_name
-  router                              = google_compute_router.nat_router.name
+resource "google_compute_router" "router" {
+  name        = join("-", compact([var.router_abbreviation, var.router_name]))
+  project     = var.project_id
+  region      = var.region
+  network     = var.vpc_name
+  description = var.router_description
+
+  bgp {
+    asn = var.router_asn
+  }
+}
+
+resource "google_compute_router_nat" "router_nat" {
+  name                                = join("-", compact([var.nat_abbreviation, var.router_name]))
+  project                             = var.project_id
+  router                              = google_compute_router.router.name
   region                              = var.region
   nat_ip_allocate_option              = var.nat_ip_allocate_option
+  nat_ips                             = var.nat_ips
   enable_endpoint_independent_mapping = var.enable_endpoint_independent_mapping
-  source_subnetwork_ip_ranges_to_nat  = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+  source_subnetwork_ip_ranges_to_nat  = var.source_subnetwork_ip_ranges_to_nat
   tcp_time_wait_timeout_sec           = var.tcp_time_wait_timeout_sec
   max_ports_per_vm                    = var.max_ports_per_vm
   min_ports_per_vm                    = var.min_ports_per_vm
 
-  log_config {
-    enable = true
-    filter = "ERRORS_ONLY"
+  dynamic "subnetwork" {
+    for_each = var.source_subnetwork_ip_ranges_to_nat == "LIST_OF_SUBNETWORKS" ? coalesce(var.subnetworks, []) : []
+    content {
+      name                    = each.value.name
+      source_ip_ranges_to_nat = each.value.source_ip_ranges_to_nat
+    }
   }
-  depends_on = [
-    google_compute_router.nat_router
-  ]
-}
 
-resource "google_compute_router" "nat_router" {
-  name    = join("-", ["nat-router", var.environment])
-  project = var.project_name
-  region  = var.region
-  network = var.vpc_name
-
-  bgp {
-    asn = 64514
+  log_config {
+    enable = var.enable_nat_logging
+    filter = var.nat_logging_filter
   }
 }

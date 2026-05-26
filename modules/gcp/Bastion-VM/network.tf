@@ -15,10 +15,10 @@
 
 # trivy:ignore:AVD-GCP-0029
 resource "google_compute_subnetwork" "bastion_subnetwork" {
-  name          = join("-", ["snet", "bastion", var.environment])
-  project       = var.project_name
+  name          = join("-", compact([var.subnetwork_abbreviation, var.subnetwork_name]))
+  project       = var.project_id
   ip_cidr_range = var.bastion_ip_cidr_range
-  region        = var.location
+  region        = var.region
   network       = var.vpc_name
 
   dynamic "log_config" {
@@ -33,11 +33,11 @@ resource "google_compute_subnetwork" "bastion_subnetwork" {
 
 # trivy:ignore:AVD-GCP-0027
 resource "google_compute_firewall" "allow_ssh_rule" {
-  project            = var.project_name
-  name               = join("-", ["fwr", "bastion-ssh-allow", var.environment])
+  project            = var.project_id
+  name               = join("-", compact([var.firewall_abbreviation, "bastion-ssh-allow"]))
   network            = var.vpc_name
-  priority           = "100"
-  source_ranges      = ["35.235.240.0/20"]
+  priority           = var.priority
+  source_ranges      = var.ssh_allow_source_ranges
   destination_ranges = [var.bastion_ip_cidr_range]
 
   allow {

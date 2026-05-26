@@ -9,9 +9,20 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "channel_name" {
-  value = google_monitoring_notification_channel.channel.name
-}
 output "channel_id" {
-  value = google_monitoring_notification_channel.channel.id
+  description = "The identifier of the notification channel (matches the name field)"
+  value       = google_monitoring_notification_channel.channel.id
+  depends_on  = [google_monitoring_notification_channel.channel]
+}
+
+output "channel_name" {
+  description = "The full REST resource name of the notification channel in the format projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]"
+  value       = google_monitoring_notification_channel.channel.name
+  depends_on  = [google_monitoring_notification_channel.channel]
+}
+
+output "verification_status" {
+  description = "Indicates whether this channel has been verified"
+  value       = google_monitoring_notification_channel.channel.verification_status
+  depends_on  = [google_monitoring_notification_channel.channel]
 }
