@@ -39,7 +39,7 @@ resource "google_container_cluster" "cluster" {
 
   # network configuration
   network         = var.vpc_id
-  subnetwork      = google_compute_subnetwork.cluster_subnetwork.name
+  subnetwork      = google_compute_subnetwork.cluster_subnetwork.id
   networking_mode = var.networking_mode
 
   node_config {
@@ -57,8 +57,8 @@ resource "google_container_cluster" "cluster" {
   }
 
   ip_allocation_policy {
-    cluster_secondary_range_name  = "cluster-pods"
-    services_secondary_range_name = "cluster-services"
+    cluster_secondary_range_name  = var.cluster_pods_secondary_range_name
+    services_secondary_range_name = var.cluster_services_secondary_range_name
   }
 
   default_snat_status {
@@ -68,7 +68,7 @@ resource "google_container_cluster" "cluster" {
   master_authorized_networks_config {
     cidr_blocks {
       cidr_block   = var.master_authorized_networks_cidr
-      display_name = "Authorized network to access CP"
+      display_name = var.master_authorized_networks_display_name
     }
   }
 
@@ -127,8 +127,11 @@ resource "google_container_cluster" "cluster" {
       enabled = var.gcp_filestore_csi_driver_config
     }
 
-    gke_backup_agent_config {
-      enabled = var.gke_backup_agent_config
+    dynamic "gke_backup_agent_config" {
+      for_each = var.gke_backup_agent_config ? [1] : []
+      content {
+        enabled = var.gke_backup_agent_config
+      }
     }
 
     gce_persistent_disk_csi_driver_config {
@@ -144,12 +147,18 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
-  vertical_pod_autoscaling {
-    enabled = var.vertical_pod_autoscaling
+  dynamic "vertical_pod_autoscaling" {
+    for_each = var.vertical_pod_autoscaling ? [1] : []
+    content {
+      enabled = var.vertical_pod_autoscaling
+    }
   }
 
-  confidential_nodes {
-    enabled = var.confidential_nodes
+  dynamic "confidential_nodes" {
+    for_each = var.confidential_nodes ? [1] : []
+    content {
+      enabled = var.confidential_nodes
+    }
   }
 
   logging_config {

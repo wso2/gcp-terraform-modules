@@ -329,3 +329,27 @@ variable "cluster_name" {
   description = "Name of the GKE cluster"
   type        = string
 }
+
+variable "subnetwork_description" {
+  description = "Description of the cluster subnetwork"
+  type        = string
+  default     = null
+}
+
+variable "cluster_pods_secondary_range_name" {
+  description = "The name of the secondary range for cluster pods"
+  type        = string
+  default     = "cluster-pods"
+}
+
+variable "cluster_services_secondary_range_name" {
+  description = "The name of the secondary range for cluster services"
+  type        = string
+  default     = "cluster-services"
+}
+
+variable "master_authorized_networks_display_name" {
+  description = "The display name for the master authorized networks CIDR block"
+  type        = string
+  default     = "Authorized network to access CP"
+}
