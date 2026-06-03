@@ -54,6 +54,11 @@ output "gke_cluster_subnet_name" {
   depends_on = [google_compute_subnetwork.cluster_subnetwork]
 }
 
+output "gke_cluster_subnet_self_link" {
+  value      = google_compute_subnetwork.cluster_subnetwork.self_link
+  depends_on = [google_compute_subnetwork.cluster_subnetwork]
+}
+
 output "gke_cluster_subnet_ip_cidr_range" {
   value      = google_compute_subnetwork.cluster_subnetwork.ip_cidr_range
   depends_on = [google_compute_subnetwork.cluster_subnetwork]

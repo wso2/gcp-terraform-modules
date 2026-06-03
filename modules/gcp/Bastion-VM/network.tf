@@ -19,26 +19,28 @@ resource "google_compute_subnetwork" "bastion_subnetwork" {
   project       = var.project_id
   ip_cidr_range = var.bastion_ip_cidr_range
   region        = var.region
-  network       = var.vpc_name
+  network       = var.network
 
   dynamic "log_config" {
     for_each = var.enable_flow_logs ? [1] : []
     content {
       aggregation_interval = var.aggregation_interval
       flow_sampling        = var.flow_sampling
-      metadata             = var.metadata
+      metadata             = var.metadata_flow_logs
     }
   }
 }
 
 # trivy:ignore:AVD-GCP-0027
 resource "google_compute_firewall" "allow_ssh_rule" {
-  project            = var.project_id
   name               = join("-", compact([var.firewall_abbreviation, "bastion-ssh-allow"]))
-  network            = var.vpc_name
+  project            = var.project_id
+  network            = var.network_name
   priority           = var.priority
   source_ranges      = var.ssh_allow_source_ranges
   destination_ranges = [var.bastion_ip_cidr_range]
+  direction          = "INGRESS"
+  description        = "Allow SSH access to the bastion VM from the whitelisted source ranges"
 
   allow {
     protocol = "tcp"

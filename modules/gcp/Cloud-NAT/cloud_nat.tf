@@ -22,7 +22,7 @@ resource "google_compute_router" "router" {
 }
 
 resource "google_compute_router_nat" "router_nat" {
-  name                                = join("-", compact([var.nat_abbreviation, var.router_name]))
+  name                                = join("-", compact([var.nat_abbreviation, var.router_nat_name]))
   project                             = var.project_id
   router                              = google_compute_router.router.name
   region                              = var.region
@@ -37,13 +37,16 @@ resource "google_compute_router_nat" "router_nat" {
   dynamic "subnetwork" {
     for_each = var.source_subnetwork_ip_ranges_to_nat == "LIST_OF_SUBNETWORKS" ? coalesce(var.subnetworks, []) : []
     content {
-      name                    = each.value.name
-      source_ip_ranges_to_nat = each.value.source_ip_ranges_to_nat
+      name                    = subnetwork.value.name
+      source_ip_ranges_to_nat = subnetwork.value.source_ip_ranges_to_nat
     }
   }
 
-  log_config {
-    enable = var.enable_nat_logging
-    filter = var.nat_logging_filter
+  dynamic "log_config" {
+    for_each = var.enable_nat_logging ? [1] : []
+    content {
+      enable = var.enable_nat_logging
+      filter = var.nat_logging_filter
+    }
   }
 }

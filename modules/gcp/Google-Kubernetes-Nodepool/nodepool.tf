@@ -61,7 +61,7 @@ resource "google_container_node_pool" "node_pool" {
   network_config {
     enable_private_nodes = true
     create_pod_range     = false
-    pod_range            = "cluster-pods"
+    pod_range            = var.node_pool_pod_range
   }
 
   autoscaling {

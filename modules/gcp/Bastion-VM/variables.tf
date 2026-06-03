@@ -24,8 +24,13 @@ variable "region" {
   type        = string
 }
 
-variable "vpc_name" {
-  description = "The VPC name in which the bastion VM will be created"
+variable "network" {
+  description = "The self link of the VPC in which the bastion VM will be created"
+  type        = string
+}
+
+variable "network_name" {
+  description = "The name of the VPC in which the bastion VM will be created"
   type        = string
 }
 
@@ -64,7 +69,7 @@ variable "flow_sampling" {
   default     = 0.5
 }
 
-variable "metadata" {
+variable "metadata_flow_logs" {
   description = "Metadata of the VPC subnetwork logs"
   type        = string
   default     = "INCLUDE_ALL_METADATA"
@@ -154,16 +159,10 @@ variable "enable_integrity_monitoring" {
   default     = true
 }
 
-variable "enable_oslogin" {
-  description = "Enable OS Login for the bastion VM"
-  type        = bool
-  default     = true
-}
-
-variable "block_project_ssh_keys" {
-  description = "Block project-wide SSH keys for the bastion VM"
-  type        = bool
-  default     = true
+variable "metadata" {
+  description = "The metadata of the bastion VM in key-value pairs"
+  type        = map(string)
+  default     = {}
 }
 
 variable "bastion_vm_labels" {

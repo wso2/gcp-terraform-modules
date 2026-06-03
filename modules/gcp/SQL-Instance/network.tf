@@ -12,16 +12,19 @@
 # Database VPC/subnet configurations
 # https://cloud.google.com/sql/docs/mysql/configure-private-services-access
 
-resource "google_compute_global_address" "rds_private_ip" {
-  name          = "rds-private-ip"
-  purpose       = "VPC_PEERING"
-  address_type  = "INTERNAL"
-  prefix_length = 16
-  network       = var.vpc_network
+resource "google_compute_global_address" "ip_address" {
+  name          = join("-", compact([var.compute_address_abbreviation, var.compute_address_name]))
+  address       = var.address
+  address_type  = var.address_type
+  prefix_length = var.prefix_length
+  description   = var.description
+  project       = var.project_id
+  network       = var.network
+  purpose       = var.purpose
 }
 
-resource "google_service_networking_connection" "rds_network_connection" {
-  network                 = var.vpc_network
+resource "google_service_networking_connection" "network_connection" {
+  network                 = var.network_name
   service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.rds_private_ip.name]
+  reserved_peering_ranges = [google_compute_global_address.ip_address.name]
 }

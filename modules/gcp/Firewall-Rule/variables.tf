@@ -76,3 +76,9 @@ variable "disabled" {
   type        = bool
   default     = false
 }
+
+variable "description" {
+  description = "The description of the firewall rule"
+  type        = string
+  default     = null
+}

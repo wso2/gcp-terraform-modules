@@ -111,7 +111,12 @@ variable "subnetworks" {
   description = "The list of subnetworks to be used for the NAT gateway"
   type = list(object({
     name                    = string
-    source_ip_ranges_to_nat = string
+    source_ip_ranges_to_nat = list(string)
   }))
   default = []
+}
+
+variable "router_nat_name" {
+  description = "The name of the router NAT"
+  type        = string
 }

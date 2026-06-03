@@ -23,8 +23,3 @@ output "router_nat_id" {
   value      = google_compute_router_nat.router_nat.id
   depends_on = [google_compute_router_nat.router_nat]
 }
-
-output "router_nat_self_link" {
-  value      = google_compute_router_nat.router_nat.self_link
-  depends_on = [google_compute_router_nat.router_nat]
-}

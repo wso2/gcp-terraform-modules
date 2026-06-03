@@ -18,6 +18,7 @@ resource "google_compute_firewall" "rule" {
   source_ranges      = var.source_ranges
   destination_ranges = var.destination_ranges
   disabled           = var.disabled
+  description        = var.description
 
   dynamic "allow" {
     for_each = var.allow_rules

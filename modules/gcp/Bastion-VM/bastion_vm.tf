@@ -47,7 +47,7 @@ resource "google_compute_instance" "bastion_vm" {
   }
 
   network_interface {
-    network            = var.vpc_name
+    network            = var.network
     subnetwork         = google_compute_subnetwork.bastion_subnetwork.self_link
     subnetwork_project = var.project_id
     network_ip         = var.bastion_vm_network_ip
@@ -59,11 +59,7 @@ resource "google_compute_instance" "bastion_vm" {
     enable_integrity_monitoring = var.enable_integrity_monitoring
   }
 
-  metadata = {
-    enable-oslogin         = var.enable_oslogin ? "TRUE" : "FALSE"
-    block-project-ssh-keys = var.block_project_ssh_keys ? "TRUE" : "FALSE"
-  }
-
+  metadata                = var.metadata
   metadata_startup_script = var.metadata_startup_script
 
   service_account {

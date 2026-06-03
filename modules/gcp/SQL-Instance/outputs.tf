@@ -9,17 +9,12 @@
 #
 # --------------------------------------------------------------------------------------
 
-output "database_internal_ip" {
-  value      = google_sql_database_instance.rds_instance.private_ip_address
-  depends_on = [google_sql_database_instance.rds_instance]
+output "private_ip_address" {
+  depends_on = [google_sql_database_instance.instance]
+  value      = google_sql_database_instance.instance.private_ip_address
 }
 
-output "database_connection_name" {
-  value      = google_sql_database_instance.rds_instance.connection_name
-  depends_on = [google_sql_database_instance.rds_instance]
-}
-
-output "database_default_user" {
-  value      = google_sql_user.rds_user.name
-  depends_on = [google_sql_user.rds_user]
+output "connection_name" {
+  depends_on = [google_sql_database_instance.instance]
+  value      = google_sql_database_instance.instance.connection_name
 }

@@ -178,3 +178,9 @@ variable "tags" {
   type        = list(string)
   default     = ["allow-health-checks"]
 }
+
+variable "node_pool_pod_range" {
+  description = "The secondary IP range for the node pool pods"
+  type        = string
+  default     = "cluster-pods"
+}
