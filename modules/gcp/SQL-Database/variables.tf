@@ -18,6 +18,11 @@
 #
 # --------------------------------------------------------------------------------------
 
+variable "project_id" {
+  description = "The ID of the project in which the resource belongs"
+  type        = string
+}
+
 variable "database_abbreviation" {
   description = "Abbreviation to be used in the database name"
   type        = string
