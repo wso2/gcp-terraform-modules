@@ -61,3 +61,8 @@ variable "alert_trigger_count" {
   description = "The alert trigger count"
   type        = number
 }
+variable "user_labels" {
+  description = "The alert policy user labels. Keys and values may only contain lowercase letters, numbers, underscores and dashes"
+  type        = map(string)
+  default     = {}
+}

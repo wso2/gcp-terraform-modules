@@ -32,6 +32,7 @@ resource "google_monitoring_alert_policy" "alert_policy" {
     auto_close = "1800s"
   }
   notification_channels = var.notification_channels_ids
+  user_labels           = var.user_labels
   documentation {
     content   = "Choreo PDP service is outputting logs that contain the word '${var.alert_name}'."
     mime_type = "text/markdown"

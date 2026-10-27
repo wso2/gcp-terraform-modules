@@ -34,4 +34,5 @@ resource "google_monitoring_alert_policy" "metric_alert_policy" {
     }
   }
   notification_channels = var.notification_channels_ids
+  user_labels           = var.user_labels
 }
