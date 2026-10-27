@@ -106,7 +106,7 @@ variable "value_extractor" {
 
 variable "bucket_options" {
   description = "Defines the bucket boundaries for DISTRIBUTION metrics"
-  type = optional(object({
+  type = object({
     linear_buckets = optional(object({
       num_finite_buckets = number
       width              = number
@@ -120,6 +120,6 @@ variable "bucket_options" {
     explicit_buckets = optional(object({
       bounds = list(number)
     }))
-  }))
+  })
   default = null
 }
